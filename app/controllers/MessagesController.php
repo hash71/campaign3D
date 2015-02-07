@@ -659,13 +659,19 @@ class MessagesController extends \BaseController {
 						->where('created_at','<',$end_plus_one)
 						->sum($code);	
 
-				$single_data['y'] = $code;
-				$single_data['qtt'] = $result;
+				$single_data['name'] = $code;
+				
+				$single_data['data'] = array();
+
+				array_push($single_data['data'], $result);
 
 				array_push($data['bar'], ($single_data));
-
+				
 
 			}
+			$datas = json_encode($data['bar']);
+
+			return dd($datas);
 			//bar chart end
 			
 
@@ -723,20 +729,43 @@ class MessagesController extends \BaseController {
 			$wrong = $total - $right;
 
 
-			$data['right_wrong'] = [
+			// $data['right_wrong'] = [
 
-				['value'=> $wrong,
-				'color'=>"#FF0040",
-				'highlight'=> "#FE2E64",
-				'label'=> "Incorrect SMS"],
-				[
-		          'value'=> $right,
-		          'color'=> "#04B404",
-		          'highlight'=> "#01DF01",
-		          'label'=> "Correct SMS"
-		        ]
+			// 	['value'=> $wrong,
+			// 	'color'=>"#FF0040",
+			// 	'highlight'=> "#FE2E64",
+			// 	'label'=> "Incorrect SMS"],
+			// 	[
+		 //          'value'=> $right,
+		 //          'color'=> "#04B404",
+		 //          'highlight'=> "#01DF01",
+		 //          'label'=> "Correct SMS"
+		 //        ]
 
-			];
+			// ];
+
+			// series: [{
+   //          type: 'pie',
+   //          name: 'SMS',
+   //          data: [
+	  //               ['Correct',   40],
+	  //               ['Wrong',       3]
+	  //           ]
+	  //       }]
+			// $data['right_wrong'] = [
+
+			// 	['type'=> 'pie',
+			// 	'name'=>'SMS',
+			// 	'highlight'=> "#FE2E64",
+			// 	'label'=> "Incorrect SMS"],
+			// 	[
+		 //          'value'=> $right,
+		 //          'color'=> "#04B404",
+		 //          'highlight'=> "#01DF01",
+		 //          'label'=> "Correct SMS"
+		 //        ]
+
+			// ];
 
 			// return dd(json_encode($data['right_wrong']));
 

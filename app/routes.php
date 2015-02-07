@@ -30,6 +30,7 @@ Route::group(['before'=>'auth'], function(){
 Route::controller('users', 'UsersController');
 
 Route::get('/', function(){	
+	// return "helo";
 		return Redirect::to('users/login');
 });
 
