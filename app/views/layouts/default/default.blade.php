@@ -13,12 +13,12 @@
   
     
 @yield('content')
+<!-- / Content Wrapper --> 
+      
+  </div><!--/MainWrapper-->
+  
+</div><!--/Smooth Scroll-->
 
-      <!-- / Content Wrapper --> 
-  </div>
-  <!--/MainWrapper-->
-</div>
-<!--/Smooth Scroll-->
 
 @include('layouts.default.modals')
 

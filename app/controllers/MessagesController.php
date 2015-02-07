@@ -671,44 +671,47 @@ class MessagesController extends \BaseController {
 			}
 			$datas = json_encode($data['bar']);
 
-			return dd($datas);
+			// return dd($datas);
 			//bar chart end
 			
-
-
-			//trend chart
-			$single_data = array();
 			
-			$date = $start;
 
+			// trend chart 		
 			
-			while (strtotime($date) <= strtotime($end)) {//for each date
-			 	
-				//current date of the loop is $date
+			$data['trend'] = array();
 
-			 	$custom_end = date('Y-m-d',strtotime('+1 day',strtotime($date)));
+			foreach ($product_codes as $code) {
+				
+				$single_data = array();
 
-			 	$abc = ['a','b','c','d','e','f'];
+				$single_data['name'] = $code;
 
-			 	$single_data['y'] = $date;
+				$single_data['data'] = array();
 
-			 	$i = 0;
+				$date = $start;
+					
+				while (strtotime($date) <=strtotime($end)) {
+					
+					$custom_end = date('Y-m-d',strtotime('+1 day',strtotime($date)));
 
-			 	foreach ($product_codes as $code) {//for each product			 		
-
-				 	$result = DB::table('message')
+					$result = DB::table('message')
 				 			  ->where('created_at','>=',$date)
 				 			  ->where('created_at','<',$custom_end)
 				 			  ->sum($code);	
 
-				 	$single_data[ $abc[$i++] ] = $result;
+				 	array_push($single_data['data'], $result);
+				 	$date = date ("Y-m-d", strtotime("+1 day", strtotime($date)));//current date 		 	
+				}
 
-			 	}
-			 	array_push($data['trend'],$single_data);	
-
-			 	$date = date ("Y-m-d", strtotime("+1 day", strtotime($date)));//current date 		 	
+				array_push($data['trend'], $single_data);
 			}
-			//trend chart end
+
+			// return dd(json_encode($data['trend']));
+
+
+
+			// trend chart end
+
 
 
 			// right wrong pie chart
@@ -729,50 +732,20 @@ class MessagesController extends \BaseController {
 			$wrong = $total - $right;
 
 
-			// $data['right_wrong'] = [
+			
+			$data['right_wrong'] = [
+				[
+					'type'=> 'pie',
+					'name'=>'SMS',
+					'data'=>[
+						['Correct',$right],
+						['Wrong',$wrong]
+					]
 
-			// 	['value'=> $wrong,
-			// 	'color'=>"#FF0040",
-			// 	'highlight'=> "#FE2E64",
-			// 	'label'=> "Incorrect SMS"],
-			// 	[
-		 //          'value'=> $right,
-		 //          'color'=> "#04B404",
-		 //          'highlight'=> "#01DF01",
-		 //          'label'=> "Correct SMS"
-		 //        ]
-
-			// ];
-
-			// series: [{
-   //          type: 'pie',
-   //          name: 'SMS',
-   //          data: [
-	  //               ['Correct',   40],
-	  //               ['Wrong',       3]
-	  //           ]
-	  //       }]
-			// $data['right_wrong'] = [
-
-			// 	['type'=> 'pie',
-			// 	'name'=>'SMS',
-			// 	'highlight'=> "#FE2E64",
-			// 	'label'=> "Incorrect SMS"],
-			// 	[
-		 //          'value'=> $right,
-		 //          'color'=> "#04B404",
-		 //          'highlight'=> "#01DF01",
-		 //          'label'=> "Correct SMS"
-		 //        ]
-
-			// ];
+				]
+			];
 
 			// return dd(json_encode($data['right_wrong']));
-
-
-			// return $wrong;
-
-
 			// right wrong pie chart end
 
 
@@ -796,21 +769,18 @@ class MessagesController extends \BaseController {
 				 	->where('gender','F')				 	
 				 	->count();
 
-			
 			$data['gender'] = [
-
-				['value'=> $male,
-				'color'=>"#FF0040",
-				'highlight'=> "#FE2E64",
-				'label'=> "Male"],
 				[
-		          'value'=> $female,
-		          'color'=> "#04B404",
-		          'highlight'=> "#01DF01",
-		          'label'=> "Female"
+		            'type'=> 'pie',
+		            'name'=> 'Gender',
+		            'data'=> [
+		                ['Male',$male],
+		                ['Female',$female]
+		            ]
 		        ]
-
-			];
+        	];
+			
+			return dd(json_encode($data['gender']));
 			
 			// gender pie chart end
 
@@ -837,21 +807,17 @@ class MessagesController extends \BaseController {
 
 			
 			$data['yes_no'] = [
-
-				['value'=> $yes,
-				'color'=>"#FF0040",
-				'highlight'=> "#FE2E64",
-				'label'=> "Yes"],
 				[
-		          'value'=> $no,
-		          'color'=> "#04B404",
-		          'highlight'=> "#01DF01",
-		          'label'=> "No"
+		            'type'=> 'pie',
+		            'name'=> 'Sales',
+		            'data'=> [
+		                ['Yes',$yes],
+		                ['No',$no]
+		            ]
 		        ]
+        	];
 
-			];
-
-			// return dd(json_encode($data['yes_no']));
+			return dd(json_encode($data['yes_no']));
 
 			
 			// sales pie chart end
