@@ -410,52 +410,58 @@ class MessagesController extends \BaseController {
 						->where('created_at','<',$end_plus_one)
 						->sum($code);	
 
-				$single_data['y'] = $code;
-				$single_data['qtt'] = $result;
+				$single_data['name'] = $code;
+				
+				$single_data['data'] = array();
+
+				array_push($single_data['data'], (int)$result);
 
 				array_push($data['bar'], ($single_data));
-
+				
 
 			}
-			// return dd(json_encode($data['bar']));
+			// $datas = json_encode($data['bar']);
+
+			// return dd($datas);
 			//bar chart end
 
 
 
-			//trend chart
-			$single_data = array();
+			// trend chart 		
 			
-			$date = $start;
+			$data['trend'] = array();
 
-			
-			while (strtotime($date) <= strtotime($end)) {//for each date
-			 	
-				//current date of the loop is $date
+			foreach ($product_codes as $code) {
+				
+				$single_data = array();
 
-			 	$custom_end = date('Y-m-d',strtotime('+1 day',strtotime($date)));
+				$single_data['name'] = $code;
 
-			 	$abc = ['a','b','c','d','e','f'];
+				$single_data['data'] = array();
 
-			 	$single_data['y'] = $date;
+				$date = $start;
+					
+				while (strtotime($date) <=strtotime($end)) {
+					
+					$custom_end = date('Y-m-d',strtotime('+1 day',strtotime($date)));
 
-			 	$i = 0;
-
-			 	foreach ($product_codes as $code) {//for each product			 		
-
-				 	$result = DB::table('message')
+					$result = DB::table('message')
 				 			  ->where('created_at','>=',$date)
 				 			  ->where('created_at','<',$custom_end)
 				 			  ->sum($code);	
 
-				 	$single_data[ $abc[$i++] ] = $result;
+				 	array_push($single_data['data'], (int)$result);
+				 	$date = date ("Y-m-d", strtotime("+1 day", strtotime($date)));//current date 		 	
+				}
 
-			 	}
-			 	array_push($data['trend'],$single_data);	
-
-			 	$date = date ("Y-m-d", strtotime("+1 day", strtotime($date)));//current date 		 	
+				array_push($data['trend'], $single_data);
 			}
+
 			// return dd(json_encode($data['trend']));
-			//trend chart end
+
+
+
+			// trend chart end
 
 
 
@@ -477,27 +483,20 @@ class MessagesController extends \BaseController {
 			$wrong = $total - $right;
 
 
+			
 			$data['right_wrong'] = [
-
-				['value'=> $wrong,
-				'color'=>"#FF0040",
-				'highlight'=> "#FE2E64",
-				'label'=> "Incorrect SMS"],
 				[
-		          'value'=> $right,
-		          'color'=> "#04B404",
-		          'highlight'=> "#01DF01",
-		          'label'=> "Correct SMS"
-		        ]
+					'type'=> 'pie',
+					'name'=>'SMS',
+					'data'=>[
+						['Correct',$right],
+						['Wrong',$wrong]
+					]
 
+				]
 			];
 
 			// return dd(json_encode($data['right_wrong']));
-
-
-			// return $wrong;
-
-
 			// right wrong pie chart end
 
 
@@ -520,22 +519,19 @@ class MessagesController extends \BaseController {
 				 	->where('gender','F')				 	
 				 	->count();
 
-			
 			$data['gender'] = [
-
-				['value'=> $male,
-				'color'=>"#FF0040",
-				'highlight'=> "#FE2E64",
-				'label'=> "Male"],
 				[
-		          'value'=> $female,
-		          'color'=> "#04B404",
-		          'highlight'=> "#01DF01",
-		          'label'=> "Female"
+		            'type'=> 'pie',
+		            'name'=> 'Gender',
+		            'data'=> [
+		                ['Male',$male],
+		                ['Female',$female]
+		            ]
 		        ]
-
-			];
+        	];
+			// return $data['gender'];
 			// return dd(json_encode($data['gender']));
+			
 			// gender pie chart end
 
 
@@ -562,19 +558,15 @@ class MessagesController extends \BaseController {
 
 			
 			$data['yes_no'] = [
-
-				['value'=> $yes,
-				'color'=>"#FF0040",
-				'highlight'=> "#FE2E64",
-				'label'=> "Yes"],
 				[
-		          'value'=> $no,
-		          'color'=> "#04B404",
-		          'highlight'=> "#01DF01",
-		          'label'=> "No"
+		            'type'=> 'pie',
+		            'name'=> 'Sales',
+		            'data'=> [
+		                ['Yes',$yes],
+		                ['No',$no]
+		            ]
 		        ]
-
-			];
+        	];
 
 			// return dd(json_encode($data['yes_no']));
 
@@ -584,18 +576,16 @@ class MessagesController extends \BaseController {
 
 
 
-		// used product chart
+					// used product chart
 			$data['used_product'] = array();
+			
 			$custom_end = date('Y-m-d',strtotime('+1 day',strtotime($end)));
 			
 			$products_used = ['UBL FW','Comp. FW','Soap User','Proxy User'];
-			$colors = ['#2CB075','#FF3483','#FF530D','#BF7524'];
+			
+			$single_data = array();
 
-			$faker = Faker::create();
-
-			for($i=1; $i<=4; $i++){
-				
-				$single_data = array();
+			for($i=1; $i<=4; $i++){				
 
 				$result = DB::table('message')
 					 	->where('created_at','>=',$start)
@@ -603,23 +593,32 @@ class MessagesController extends \BaseController {
 					 	->where('currently_used_product_table_id',$i)
 					 	->count();
 
-				$single_data=	['value'=> $result,
-								'color'=>$colors[$i-1],
-								'highlight'=> "#FE2E64",
-								'label'=>$products_used[$i-1] ];
+				
 
-
-				// $single_data[ $products_used[$i-1] ] = $result;
-
-				array_push($data['used_product'],$single_data);
+				array_push($single_data,(int)$result);
 
 			}
+
+			$data['used_product'] = [
+				[
+		            'type'=> 'pie',
+		            'name'=> 'Used',
+		            'data'=> [
+		                ['UBL FW',$single_data[0]],
+		                ['Comp. FW',$single_data[1]],
+		                ['Soap User',$single_data[2]],
+		                ['Proxy User',$single_data[3]]
+		            ]
+		        ]
+        	];
+
 
 			// return $data['used_product'];
 			
 
 			// used product chart end
 
+        	$data = json_decode(json_encode($data));
 			// return $data;
 			return Response::json($data);
 		}
@@ -663,13 +662,13 @@ class MessagesController extends \BaseController {
 				
 				$single_data['data'] = array();
 
-				array_push($single_data['data'], $result);
+				array_push($single_data['data'], (int)$result);
 
 				array_push($data['bar'], ($single_data));
 				
 
 			}
-			$datas = json_encode($data['bar']);
+			// $datas = json_encode($data['bar']);
 
 			// return dd($datas);
 			//bar chart end
@@ -699,7 +698,7 @@ class MessagesController extends \BaseController {
 				 			  ->where('created_at','<',$custom_end)
 				 			  ->sum($code);	
 
-				 	array_push($single_data['data'], $result);
+				 	array_push($single_data['data'], (int)$result);
 				 	$date = date ("Y-m-d", strtotime("+1 day", strtotime($date)));//current date 		 	
 				}
 
@@ -780,7 +779,7 @@ class MessagesController extends \BaseController {
 		        ]
         	];
 			
-			return dd(json_encode($data['gender']));
+			// return dd(json_encode($data['gender']));
 			
 			// gender pie chart end
 
@@ -830,16 +829,14 @@ class MessagesController extends \BaseController {
 
 			// used product chart
 			$data['used_product'] = array();
+			
 			$custom_end = date('Y-m-d',strtotime('+1 day',strtotime($end)));
 			
 			$products_used = ['UBL FW','Comp. FW','Soap User','Proxy User'];
-			$colors = ['#2CB075','#FF3483','#FF530D','#BF7524'];
+			
+			$single_data = array();
 
-			$faker = Faker::create();
-
-			for($i=1; $i<=4; $i++){
-				
-				$single_data = array();
+			for($i=1; $i<=4; $i++){				
 
 				$result = DB::table('message')
 					 	->where('created_at','>=',$start)
@@ -847,31 +844,32 @@ class MessagesController extends \BaseController {
 					 	->where('currently_used_product_table_id',$i)
 					 	->count();
 
-				$single_data=	['value'=> $result,
-								'color'=>$colors[$i-1],
-								'highlight'=> "#FE2E64",
-								'label'=>$products_used[$i-1] ];
+				
 
-
-				// $single_data[ $products_used[$i-1] ] = $result;
-
-				array_push($data['used_product'],$single_data);
+				array_push($single_data,(int)$result);
 
 			}
+
+			$data['used_product'] = [
+				[
+		            'type'=> 'pie',
+		            'name'=> 'Used',
+		            'data'=> [
+		                ['UBL FW',$single_data[0]],
+		                ['Comp. FW',$single_data[1]],
+		                ['Soap User',$single_data[2]],
+		                ['Proxy User',$single_data[3]]
+		            ]
+		        ]
+        	];
+
 
 			// return $data['used_product'];
 			
 
 			// used product chart end
-
-
-
-
-			
-			$datas= json_encode($data);
-			$data = $datas;
-			// return dd($data);
-
+        	// return json_encode(value)
+        	// return dd($data);
 			return View::make('index',compact('data'));
 
 

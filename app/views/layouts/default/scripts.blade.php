@@ -44,7 +44,15 @@ $('.powerwidget > header').on('touchstart', function(event){});
 
 <script type="text/javascript">
     // When the document is ready
+    var all_data={{json_encode($data)}};
     var sms_pie=null,gender_pie=null,product_pie=null,sales_pie=null,sku_bar=null,sku_area=null;
+    function updater()
+    {
+        for (var i = 0; i < sms_pie.series.length; i++) {sms_pie.series[i].remove(true);}
+        sms_pie.addSeries(all_data.right_wrong[0],true);
+        console.log(all_data.right_wrong);
+        //.Series.update(all_data.right_wrong);
+    }
     $(document).ready(function () {
       $("#switch_view").change(function(){
           if($("#switch_view").val()==1)
@@ -71,18 +79,22 @@ $('.powerwidget > header').on('touchstart', function(event){});
           method: 'GET',
           data:{ 'range': $("#datetimepicker1").val()},
           success: function(dt){
-
+            all_data=dt;
+            updater();
+            $("#powerwidgets").css({ opacity: 1 });
           }
         });
 
       });
       /// SMS PIE
-      sms_pie=$('#pie_sms').highcharts({
+      sms_pie = new Highcharts.Chart(
+      {
         credits:
         {
           enabled:false
         },
         chart: {
+            renderTo: 'pie_sms',
             type: 'pie',
             options3d: {
                 enabled: true,
@@ -90,7 +102,7 @@ $('.powerwidget > header').on('touchstart', function(event){});
                 beta: 0
             }
         },
-        colors:["#4EB82A","#DA2B2B"],
+        colors:["#58E271","#BF304A"],
         title: {
             text: 'SMS Error Ratio'
         },
@@ -108,22 +120,16 @@ $('.powerwidget > header').on('touchstart', function(event){});
                 }
             }
         },
-        series: [{
-            type: 'pie',
-            name: 'SMS',
-            data: [
-                ['Correct',   40],
-                ['Wrong',       3]
-            ]
-        }]
+        series: all_data.right_wrong
     });
     /// Genderwise Customer
-          gender_pie=$('#gender_pie').highcharts({
+    gender_pie = new Highcharts.Chart({
         credits:
         {
           enabled:false
         },
         chart: {
+            renderTo:'gender_pie',
             type: 'pie',
             options3d: {
                 enabled: true,
@@ -131,9 +137,9 @@ $('.powerwidget > header').on('touchstart', function(event){});
                 beta: 0
             }
         },
-        colors:["#4EB82A","#DA2B2B"],
+        colors:["#13D8D9","#D9299B"],
         title: {
-            text: 'SMS Error Ratio'
+            text: 'GENDER Ratio'
         },
         tooltip: {
             pointFormat: '{series.name}- value:<b>{point.y:.1f}</b> Percentage <b>{point.percentage:.1f}%</b>'
@@ -149,22 +155,16 @@ $('.powerwidget > header').on('touchstart', function(event){});
                 }
             }
         },
-        series: [{
-            type: 'pie',
-            name: 'SMS',
-            data: [
-                ['Correct',   40],
-                ['Wrong',       3],
-            ]
-        }]
+        series: all_data.gender
     });
   /// Genderwise Customer
-          product_pie=$('#product_pie').highcharts({
+    product_pie= new Highcharts.Chart({
         credits:
         {
           enabled:false
         },
         chart: {
+            renderTo:'product_pie',
             type: 'pie',
             options3d: {
                 enabled: true,
@@ -172,9 +172,8 @@ $('.powerwidget > header').on('touchstart', function(event){});
                 beta: 0
             }
         },
-        colors:["#4EB82A","#DA2B2B"],
         title: {
-            text: 'SMS Error Ratio'
+            text: 'Used Product Ratio'
         },
         tooltip: {
             pointFormat: '{series.name}- value:<b>{point.y:.1f}</b> Percentage <b>{point.percentage:.1f}%</b>'
@@ -190,23 +189,17 @@ $('.powerwidget > header').on('touchstart', function(event){});
                 }
             }
         },
-        series: [{
-            type: 'pie',
-            name: 'SMS',
-            data: [
-                ['Correct',   40],
-                ['Wrong',       3]
-            ]
-        }]
+        series: all_data.used_product
     });
 
     /// Sales Pie
-          sales_pie=$('#sales_pie').highcharts({
+    sales_pie= new Highcharts.Chart({
         credits:
         {
           enabled:false
         },
         chart: {
+            renderTo:'sales_pie',
             type: 'pie',
             options3d: {
                 enabled: true,
@@ -214,9 +207,9 @@ $('.powerwidget > header').on('touchstart', function(event){});
                 beta: 0
             }
         },
-        colors:["#4EB82A","#DA2B2B"],
+        colors:["#58E271","#BF304A"],
         title: {
-            text: 'SMS Error Ratio'
+            text: 'Sales Ratio'
         },
         tooltip: {
             pointFormat: '{series.name}- value:<b>{point.y:.1f}</b> Percentage <b>{point.percentage:.1f}%</b>'
@@ -232,14 +225,7 @@ $('.powerwidget > header').on('touchstart', function(event){});
                 }
             }
         },
-        series: [{
-            type: 'pie',
-            name: 'SMS',
-            data: [
-                ['Correct',   40],
-                ['Wrong',       3]
-            ]
-        }]
+        series: all_data.yes_no
     });
     //// SKU Bar
     sku_bar = new Highcharts.Chart({
@@ -270,32 +256,7 @@ $('.powerwidget > header').on('touchstart', function(event){});
                 depth: 25
             }
         },
-        series: [
-          {
-            name:'SKU1',
-            data: [29.9]
-          },
-          {
-            name:'SKU2',
-            data: [1.9]
-          },
-          {
-            name:'SKU3',
-            data: [13.9]
-          },
-          {
-            name:'SKU4',
-            data: [44.9]
-          },
-          {
-            name:'SKU5',
-            data: [33.9]
-          },
-          {
-            name:'SKU6',
-            data: [133.9]
-          }
-        ]
+        series: all_data.bar
     });
 
     function showValues() {
@@ -315,13 +276,14 @@ $('.powerwidget > header').on('touchstart', function(event){});
         sku_bar.redraw(false);
     });
     // SKU are
-       sku_area= $('#sku_area').highcharts({
+       sku_area=  new Highcharts.Chart({
          credits:
         {
           enabled:false
         },
         chart: {
-            type: 'line'
+            type: 'line',
+            renderTo:'sku_area'
         },
         title: {
             text: 'US and USSR nuclear stockpiles'
@@ -366,31 +328,7 @@ $('.powerwidget > header').on('touchstart', function(event){});
                 }
             }
         },
-        series: [{
-            name: 'SKU 1',
-            data: [6,4,2,3,3,6,2,9,2,4]
-        }, 
-        {
-            name: 'SKU 2',
-            data: [8,4,2,3,3,6,2,9,2,4]
-        }, 
-        {
-            name: 'SKU 3',
-            data: [0,4,2,3,3,6,2,9,2,4]
-        }, 
-        {
-            name: 'SKU 4',
-            data: [3,4,2,3,3,6,2,9,2,4]
-        }, 
-        {
-            name: 'SKU 5',
-            data: [5,4,2,2,3,6,2,9,2,4]
-        }, 
-        {
-            name: 'SKU 6',
-            data: [3,4,2,0,3,6,2,9,2,4]
-        }
-        ]
+        series: all_data.trend
     });
 
 $("#morris-stacked-bar").hide();
