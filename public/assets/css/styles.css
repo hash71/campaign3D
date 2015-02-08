@@ -4546,19 +4546,28 @@ opacity: 1;
 	padding: 0;
 	margin: 10px 0 5px;
 }
-
 .main-info .user-img {
-	margin: 0 auto;
-	display: block;
-	max-width: 150px;
+    margin: 0 auto;
+    display: block;
+
 }
 
 .main-info .user-img img {
-	display: inline-block;
-	max-width: 100%;
-	border-radius: 50%;
-	box-shadow: 0 0 0 7px #fff;
+    display: inline-block;
+    max-width: 100%;
+    border-radius: 50%;
+    box-shadow: 0 0 0 7px #fff;
 }
+
+.main-info .user-img i{
+    font-size: 150px;
+    color: #33383D;
+    background: #ccc;
+    padding: 20px 40px;
+    border-radius: 100%;
+    border: 5px solid #fff;
+}
+
 
 .user-profile {
 	border-top-left-radius: 3px;

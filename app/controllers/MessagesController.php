@@ -618,9 +618,9 @@ class MessagesController extends \BaseController {
 
 			// used product chart end
 
-        	$data = json_decode(json_encode($data));
-			// return $data;
-			return Response::json($data);
+        	// $data = json_decode(json_encode($data));
+			return $data;
+			 // return Response::json($data);
 		}
 
 

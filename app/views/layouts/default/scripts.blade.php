@@ -48,13 +48,34 @@ $('.powerwidget > header').on('touchstart', function(event){});
     var sms_pie=null,gender_pie=null,product_pie=null,sales_pie=null,sku_bar=null,sku_area=null;
     function updater()
     {
+        //SMS
         for (var i = 0; i < sms_pie.series.length; i++) {sms_pie.series[i].remove(true);}
         sms_pie.addSeries(all_data.right_wrong[0],true);
-        console.log(all_data.right_wrong);
-        //.Series.update(all_data.right_wrong);
+        //GENDER
+        for (var i = 0; i < gender_pie.series.length; i++) {gender_pie.series[i].remove(true);}
+        gender_pie.addSeries(all_data.gender[0],true);
+        // Product
+        for (var i = 0; i < product_pie.series.length; i++) {product_pie.series[i].remove(true);}
+        product_pie.addSeries(all_data.used_product[0],true);
+        // Sales
+        for (var i = 0; i < sales_pie.series.length; i++) {sales_pie.series[i].remove(true);}
+        sales_pie.addSeries(all_data.yes_no[0],true);
+
+        //Bar
+         for(var i=0;i<sku_bar.series.length;i++)
+         {
+            sku_bar.series[i].setData(all_data.bar[i].data);
+         }
+         sku_bar.redraw();
+        //Trend
+        for(var i=0;i<sku_area.series.length;i++){ sku_area.series[i].setData(all_data.trend[i].data);
+         }
+         sku_area.redraw();
     }
     $(document).ready(function () {
       $("#switch_view").change(function(){
+            sku_area.redraw();
+            sku_bar.redraw();
           if($("#switch_view").val()==1)
                 {
                     $("#morrisasline").hide();
@@ -75,11 +96,14 @@ $('.powerwidget > header').on('touchstart', function(event){});
       { 
         $("#powerwidgets").css({ opacity: 0.5 });
         $.ajax({
-          url: '#',     
+          url: '#', 
+          //dataType : 'json',    
           method: 'GET',
           data:{ 'range': $("#datetimepicker1").val()},
           success: function(dt){
-            all_data=dt;
+            // console.log(dt);
+           all_data = dt;
+            
             updater();
             $("#powerwidgets").css({ opacity: 1 });
           }
@@ -257,6 +281,7 @@ $('.powerwidget > header').on('touchstart', function(event){});
             }
         },
         series: all_data.bar
+
     });
 
     function showValues() {

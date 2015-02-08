@@ -29,6 +29,10 @@ Route::group(['before'=>'auth'], function(){
 
 Route::controller('users', 'UsersController');
 
+Route::get('/profile', function(){
+	return View::make('profile');
+});
+
 Route::get('/', function(){	
 	// return "helo";
 		return Redirect::to('users/login');
