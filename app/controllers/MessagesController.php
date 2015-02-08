@@ -817,7 +817,7 @@ class MessagesController extends \BaseController {
 		        ]
         	];
 
-			return dd(json_encode($data['yes_no']));
+			// return dd(json_encode($data['yes_no']));
 
 			
 			// sales pie chart end
