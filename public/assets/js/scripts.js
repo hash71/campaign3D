@@ -2583,6 +2583,7 @@ var oTable2=null;
                                  ]                                 
                     }              
                 );
+                //oTable2.column( 0 ).visible( false );
 
                 $("tfoot input").keyup(function () {
                     /* Filter on the column (the index) of this element */

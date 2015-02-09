@@ -33,7 +33,7 @@ class MessagesController extends \BaseController {
 
 				$msg->error = json_encode($errors);
 
-				return dd($msg);
+				// return dd($msg);
 
 				$msg->save();
 				
@@ -358,7 +358,7 @@ class MessagesController extends \BaseController {
 
 						$msg->save();
 
-						return dd($msg);
+						// return dd($msg);
 
 
 
@@ -635,11 +635,11 @@ class MessagesController extends \BaseController {
 			// $start = '2015-01-31';
 			// $end = '2015-02-05';
 
-			$start =  '2014-10-20';
-			$end   =  '2014-11-30';
+			// $start =  '2014-10-20';
+			// $end   =  '2014-11-30';
 			
-			// $start = date('Y-m-01');
-			// $end =  date('Y-m-t');
+			$start = date('Y-m-01');
+			$end =  date('Y-m-t');
 		
 			// $start = date('Y-m-d',strtotime('-1 day',strtotime($start)));
 			$end_plus_one   = date('Y-m-d',strtotime('+1 day',strtotime($end)));

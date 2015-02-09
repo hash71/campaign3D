@@ -40,6 +40,7 @@
       <li>{{link_to('percentage/index','Percentage Page')}}</li>
       <li>{{link_to('table/index','Table Page')}}</li>
       <li>{{link_to('bplist','BP List')}}</li>
+      <li>{{link_to('timeline','Timeline')}}</li>
     </ul>
     </div>
     <!--/MainMenu-->

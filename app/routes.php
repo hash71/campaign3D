@@ -16,6 +16,49 @@ Route::get('mobile',function(){
 	 return preg_match("/^01[0-9]{9}$/", '01710340450');
 });
 
+Route::get('timeline',function(){
+
+	if(Request::ajax()){
+	
+		$messages = DB::select('SELECT * FROM message WHERE created_at BETWEEN timestamp(DATE_SUB(NOW(), INTERVAL 30 SECOND)) AND timestamp(NOW())');
+
+		return View::make('timelineajax',compact('messages'));
+	
+	}
+
+
+	$start = date("Y-m-d");
+
+	$end = date('Y-m-d',strtotime('+1 day',strtotime($start)));
+
+	$messages = DB::table('message')
+				->where('created_at','>=',$start)
+				->where('created_at','<',$end)
+				->orderBy('created_at','desc')
+				->get();
+	// return dd($messages);
+
+	return View::make('timeline',compact('messages'));
+	
+});
+
+Route::get('uri', function(){
+
+	// $result = DB::select(query, bindings)
+	$messages = DB::select('SELECT * FROM message WHERE created_at BETWEEN timestamp(DATE_SUB(NOW(), INTERVAL 30 SECOND)) AND timestamp(NOW())');
+	return dd($result);
+	$start = date("h-i-s");
+
+	$end = date('h-i-s',strtotime('-30 second',strtotime($start)));
+
+	$messages = DB::table('message')
+				->where('created_at','>=',$end)
+				->where('created_at','<',$start)
+				->orderBy('created_at','desc')
+				->get();
+	return dd($messages);
+});
+
 Route::get('newapi/{token}/{bp_mobile}/{message}','MessagesController@newcreate');
 
 Route::group(['before'=>'auth'], function(){

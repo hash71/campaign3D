@@ -6,7 +6,7 @@
 <meta name="author" content="DazeinCreative">
 <meta name="description" content="ORB - Powerfull and Massive Admin Dashboard Template with tonns of useful features">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BP List</title>
+<title>Timeline</title>
 
 <link href="assets/css/datepicker.css" rel="stylesheet" type="text/css">
 <link href="assets/css/styles.css" rel="stylesheet" type="text/css">
@@ -78,53 +78,67 @@
           <ul>
             <li><a href="index.html"><i class="fa fa-home"></i></a></li>
             <li><a href="index.html">Dashboard</a></li>
-            <li class="active">BP List</li>
+            <li class="active">TimeLine</li>
           </ul>
         </div>
         <!--/Breadcrumb--> 
         
-
           
         <!-- Widget Row Start grid -->
-        <div class="row" id="powerwidgets">   
-          <div class="col-lg-12 bootstrap-grid" >
+        <div class="row" id="powerwidgets">
+
+          <div class="col-md-12 bootstrap-grid">
             <!-- New widget -->
-            <div class="powerwidget" id="datatable-filter-column" data-widget-editbutton="false">
+            <div class="powerwidget blue" id="timelineexample" data-widget-editbutton="false">
               <header>
-                <h2>BP List</h2>
+                <h2>TimeLine<small>Example</small></h2>
               </header>
               <div class="inner-spacer">
-                <table class="display table table-striped table-hover" id="table-bplist">
-                  <thead>
-                    <tr>
-                      <th>BP Name</th>
-                      <th>BP Phone Number</th>
-                      <th>BP LSA Code</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @foreach(DB::table('bp_info')->get() as $bp)
-                    <tr>
+                <div class="activity-block">
+                  <ul class="tmtimeline" id="smsLine">
 
-                      <td><a href="{{URL::to('profile',$bp->id)}}">{{$bp->name}}</a></td>
-                      <td>{{$bp->mobile}}</td>
-                      <td>{{$bp->lsa_code}}</td>
-                    </tr>
-                    @endforeach
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <th><input type="text" name="filter_bp_name" placeholder="Filter BP Name" class="search_init" /></th>
-                      <th><input type="text" name="filter_bp_phone_number" placeholder="Filter BP Phone" class="search_init" /></th>
-                      <th><input type="text" name="filter_bp_lsa_code" placeholder="Filter BP LSA" class="search_init" /></th>
-                    </tr>
-                  </tfoot>
-                </table>
+                  @foreach($messages as $message)
+
+                    <li>
+                      <time class="tmtime" datetime="2013-04-10 18:30"><span>{{date('Y-m-d',strtotime($message->created_at))}}</span> <span>{{date('h-i',strtotime($message->created_at))}}</span></time>
+                      @if($message->error)
+                        <div class="tmicon bg-red fa-envelope"></div>                        
+                      @else
+                        <div class="tmicon bg-green fa-envelope"></div>                        
+                      @endif
+                      <div class="tmlabel">
+                        <h2>
+                        {{DB::table('bp_info')->where('mobile',$message->bp_mobile)->pluck('name')}}--
+                        {{$message->bp_mobile}}
+                        </h2>
+
+                        @if($message->error)
+                            <p><strong>Error</strong></p>
+                            <?php $x = json_decode($message->error);?>
+
+                            @foreach($x as $y)
+                              {{"#".$y}}
+                            @endforeach
+
+                           
+                          
+                        @else
+                          <p>Age: {{$message->age}} | Gender: {{$message->gender}} | Mobile: {{$message->customer_mobile}} | Upazilla/Thana: {{$message->thana_code}} | District: {{DB::table('thana')->where('thana_code',$message->thana_code)->pluck('district')}} | Division: {{DB::table('thana')->where('thana_code',$message->thana_code)->pluck('division')}} | Education: {{DB::table('education_info')->where('id',$message->education_id)->pluck('name')}} | Occupation: {{DB::table('occupation')->where('id',$message->id)->pluck('occupation_name')}} | Coupon: {{$message->coupon_code}} | Used Product: {{DB::table('currently_used_product')->where('id',$message->currently_used_product_table_id)->pluck('product')}}</p>
+                        <p>FAL: {{$message->FAL}} | PDF: {{$message->PDF}}| PWB: {{$message->PWB}}| PNS: {{$message->PNS}}| PPC: {{$message->PPC}}| DBM: {{$message->DBM}}</p>
+                        @endif
+                        
+                        
+                      </div>
+                    </li>
+                  @endforeach
+                    
+                  </ul>
+                </div>
               </div>
             </div>
-            <!-- End .powerwidget -->
+            <!-- End Widget -->
           </div>
-          <!-- /Widgets Column Grid--> 
+          <!-- /Inner Row Col-md-12 -->
         </div>
         <!-- /Widgets Row End Grid--> 
     </div>
@@ -205,8 +219,7 @@ $('.powerwidget > header').on('touchstart', function(event){});
 </script>
 
 <!--EasyPieChart--> 
-<script type="text/javascript" src="assets/js/vendors/easing/jquery.easing.1.3.min.js"></script> 
-<script type="text/javascript" src="assets/js/vendors/easypie/jquery.easypiechart.min.js"></script> 
+<script type="text/javascript" src="assets/js/vendors/easing/jquery.easing.1.3.min.js"></script>
 
 <!--Fullscreen--> 
 <script type="text/javascript" src="assets/js/vendors/fullscreen/screenfull.min.js"></script> 
@@ -222,61 +235,50 @@ $('.powerwidget > header').on('touchstart', function(event){});
 <script type="text/javascript" src="assets/js/vendors/classie/classie.js"></script> 
 
 <!--PowerWidgets--> 
-<script type="text/javascript" src="assets/js/vendors/powerwidgets/powerwidgets.min.js"></script> 
-
-<!--Morris Chart--> 
-<script type="text/javascript" src="assets/js/vendors/raphael/raphael-min.js"></script> 
-<script type="text/javascript" src="assets/js/vendors/morris/morris.min.js"></script> 
-
-<!--FlotChart--> 
-<script type="text/javascript" src="assets/js/vendors/flotchart/jquery.flot.min.js"></script> 
-<script type="text/javascript" src="assets/js/vendors/flotchart/jquery.flot.resize.min.js"></script> 
-<script type="text/javascript" src="assets/js/vendors/flotchart/jquery.flot.axislabels.js"></script>
-<script type="text/javascript" src="assets/js/vendors/flotchart/jquery.flot.pie.min.js"></script> 
-
-<!--Chart.js--> 
-<script type="text/javascript" src="assets/js/vendors/chartassets/js/chart.min.js"></script> 
-
-<!--Calendar--> 
-<script type="text/javascript" src="assets/js/vendors/fullcalendar/fullcalendar.min.js"></script> 
-<script type="text/javascript" src="assets/js/vendors/fullcalendar/gcal.js"></script> 
+<script type="text/javascript" src="assets/js/vendors/powerwidgets/powerwidgets.min.js"></script>  
 
 <!--Bootstrap--> 
-<script type="text/javascript" src="assets/js/vendors/bootstrap/bootstrap.min.js"></script> 
-
-<!--Vector Map--> 
-<script type="text/javascript" src="assets/js/vendors/vector-map/jquery.vmap.min.js"></script> 
-<script type="text/javascript" src="assets/js/vendors/vector-map/jquery.vmap.sampledata.js"></script> 
-<script type="text/javascript" src="assets/js/vendors/vector-map/jquery.vmap.world.js"></script>
-
-<!--Datatables--> 
-<script type="text/javascript" src="assets/js/vendors/datatables/jquery.dataTables.min.js"></script> 
-<script type="text/javascript" src="assets/js/vendors/datatables/jquery.dataTables-bootstrap.js"></script> 
-<script type="text/javascript" src="assets/js/vendors/datatables/dataTables.colVis.js"></script> 
-<script type="text/javascript" src="assets/js/vendors/datatables/colvis.extras.js"></script>
-<script type="text/javascript" src="assets/js/vendors/datatables/column-filter.js"></script>  
+<script type="text/javascript" src="assets/js/vendors/bootstrap/bootstrap.min.js"></script>
 
 
-<!--Datepicker--> 
-<script type="text/javascript" src="assets/js/vendors/datepicker/bootstrap-datepicker.js"></script>
-
-<!--ToDo--> 
-<script type="text/javascript" src="assets/js/vendors/todos/todos.js"></script> 
 
 <!--Main App--> 
 <script type="text/javascript" src="assets/js/scripts.js"></script>
+<script type="text/javascript" src="assets/js/vendors/ionsound/ion.sound.js"></script>
+<script type="text/javascript">
+  
+  function checker()
+  {
+    $.ajax({
+          url: '#', 
+          method: 'GET',
+          success: function(dt){
+            if(dt!='') {
+              ion.sound.play("bell_ring");
+            $("#smsLine").prepend(dt);
+            $("#ajax_data").slideUp(1).slideDown(1000);
+            }
+        }
+      });
+    setTimeout(function() {
+      checker();
+    }, 5000);
+  }
+  $(function(){
 
-        <script type="text/javascript">
-            // When the document is ready
-            $(document).ready(function () {
-                
-                $('#datetimepicker1').datepicker({
-                    format: "dd/mm/yyyy"
-                });  
-            
-            });
-        </script>
+    ion.sound({
+            sounds: [
+                {name: "beer_can_opening"},
+                {name: "bell_ring"}
+            ],
+            path: "assets/js/vendors/ionsound/sounds/",
+            preload: true,
+            volume: 1.0
+        });
+  });
+  checker();
 
+</script>
 
 <!--/Scripts-->
 
