@@ -239,6 +239,9 @@ class MessagesController extends \BaseController {
 
 									$errors['mobile_blank'] = "Customer mobile field blank";
 
+								}else if( !preg_match("/^01[0-9]{9}$/", $msg->customer_mobile)){//changed here
+									$errors['mobile_invalid_format'] = "Customer mobile invalid format";
+
 								}else{
 
 									if( strlen($msg->customer_mobile) != 11 ){

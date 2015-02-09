@@ -12,6 +12,10 @@
 
 // });
 
+Route::get('mobile',function(){
+	 return preg_match("/^01[0-9]{9}$/", '01710340450');
+});
+
 Route::get('newapi/{token}/{bp_mobile}/{message}','MessagesController@newcreate');
 
 Route::group(['before'=>'auth'], function(){
