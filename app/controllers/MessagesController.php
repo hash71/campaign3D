@@ -348,10 +348,12 @@ class MessagesController extends \BaseController {
 							}
 
 						}	
+						if(sizeof($errors)){
+							$msg->error = json_encode($errors);	
+						}
+						
 
-						$msg->error = json_encode($errors);
-
-						// $msg->save();
+						$msg->save();
 
 						return dd($msg);
 
