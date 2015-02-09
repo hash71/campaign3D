@@ -654,7 +654,7 @@ ul.portlet-bottom-block li:before {
 }
 
 ul.portlet-bottom-block li strong {
-	font-size: 1.8em;
+	font-size: 18px;
 	line-height: 25px;
 	display: block
 }
@@ -9277,3 +9277,11 @@ code {
 .css .o,
 .css .o+.nt,
 .css .nt+.nt { color: #999 }
+.bg-red1
+{
+	border-left:10px solid #E4A2A2 !important;
+}
+.bg-red1:hover
+{
+	background-color:#E5D3D3 !important;
+}

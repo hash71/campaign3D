@@ -30,6 +30,10 @@ Route::group(['before'=>'auth'], function(){
 
 Route::controller('users', 'UsersController');
 
+Route::get('bplist', function(){
+
+	return View::make('bplist');
+});
 
 Route::get('/profile/{id}', function($id){
 	

@@ -61,6 +61,7 @@
       <li>{{link_to('messages/index','Index Page')}}</li>
       <li>{{link_to('percentage/index','Percentage Page')}}</li>
       <li>{{link_to('table/index','Table Page')}}</li>
+      <li>{{link_to('bplist','BP List')}}</li>
     </ul>
     </div>
     <!--/MainMenu-->
@@ -86,7 +87,7 @@
         <!-- Widget Row Start grid -->
         <div class="row" id="powerwidgets">
 
-            <div class="col-md-4 col-sm-6 bootstrap-grid">
+            <div class="col-md-6 col-sm-6 bootstrap-grid">
               <!-- New widget -->
               <div class="powerwidget powerwidget-as-portlet powerwidget-as-portlet-cold-grey" id="gender" data-widget-editbutton="false">
               <header><b>Gender</b></header>
@@ -98,7 +99,7 @@
 
                   <li class="col-md-4 col-sm-4 col-xs-4"><strong>{{$females}}<br>({{round(($females/$total_records)*100,2)}}%)</strong><small>Female</small></li>
 
-                  <li class="col-md-4 col-sm-4 col-xs-4"><strong>{{$total_records}}<br>{{"<br>"}}</strong><small>total</small></li>
+                  <li class="col-md-4 col-sm-4 col-xs-4"><strong><br>{{$total_records}}</strong><small>total</small></li>
                 </ul>
               </div>
             </div>
@@ -106,19 +107,39 @@
             </div>
             <!-- /Inner Row Col-md-4 -->
 
-          <div class="col-md-8 col-sm-12 bootstrap-grid">            
+            <div class="col-md-6 col-sm-6 bootstrap-grid">
+              <!-- New widget -->
+              <div class="powerwidget powerwidget-as-portlet powerwidget-as-portlet-dark-blue" id="sales" data-widget-editbutton="false">
+              <header><b>Sales</b></header>
+              <div class="inner-spacer nopadding">
+                <div class="portlet-big-icon animated bounceIn text-white"><i class="fa fa-money"></i></div>
+                <ul class="portlet-bottom-block">
+                  <li class="col-md-4 col-sm-4 col-xs-4"><strong>{{$yes}}<br>({{round(($yes/$total_records)*100,2)}}%)</strong><small>Yes</small></li>
+                  <li class="col-md-4 col-sm-4 col-xs-4"><strong>{{$no}}<br>({{round(($no/$total_records)*100,2)}}%)</strong><small>No</small></li>
+                  <li class="col-md-4 col-sm-4 col-xs-4"><strong><br>{{$total_records}}</strong><small>Total</small></li>
+                </ul>
+              </div>
+            </div>
+            <!-- /New widget -->
+            </div>
+            <!-- /Inner Row Col-md-4 -->
+
+<div class="clearfix"></div>
+
+
+          <div class="col-md-12 col-sm-12 bootstrap-grid">            
             <!-- New widget -->
             <div class="powerwidget powerwidget-as-portlet powerwidget-as-portlet-orange" id="education" data-widget-editbutton="false">
               <header><b>Education</b></header>
               <div class="inner-spacer nopadding">
                 <div class="portlet-big-icon animated bounceIn"><i class="fa fa-graduation-cap"></i></div>
                 <ul class="portlet-bottom-block">
-                  <li class="col-md-2 col-sm-4 col-xs-4"><strong>{{$education['Under SSC']}}({{round(($education['Under SSC']/$total_records)*100,2)}}%)</strong><small>Under SSC</small></li>
-                  <li class="col-md-2 col-sm-4 col-xs-4"><strong>{{$education['SSC']}}({{round(($education['SSC']/$total_records)*100,2)}}%)</strong><small>SSC</small></li>
-                  <li class="col-md-2 col-sm-4 col-xs-4"><strong>{{$education['HSC']}}({{round(($education['HSC']/$total_records)*100,2)}}%)</strong><small>HSC</small></li>
-                  <li class="col-md-2 col-sm-4 col-xs-4"><strong>{{$education['Grad']}}({{round(($education['Grad']/$total_records)*100,2)}}%)</strong><small>Graduate</small></li>
-                  <li class="col-md-2 col-sm-4 col-xs-4"><strong>{{$education['Masters']}}({{round(($education['Masters']/$total_records)*100,2)}}%)</strong><small>Masters</small></li>
-                  <li class="col-md-2 col-sm-4 col-xs-4"><strong>{{$total_records}}</strong><small>Total</small></li>
+                  <li class="col-md-2 col-sm-4 col-xs-4"><strong>{{$education['Under SSC']}}<br>({{round(($education['Under SSC']/$total_records)*100,2)}}%)</strong><small>Under SSC</small></li>
+                  <li class="col-md-2 col-sm-4 col-xs-4"><strong>{{$education['SSC']}}<br>({{round(($education['SSC']/$total_records)*100,2)}}%)</strong><small>SSC</small></li>
+                  <li class="col-md-2 col-sm-4 col-xs-4"><strong>{{$education['HSC']}}<br>({{round(($education['HSC']/$total_records)*100,2)}}%)</strong><small>HSC</small></li>
+                  <li class="col-md-2 col-sm-4 col-xs-4"><strong>{{$education['Grad']}}<br>({{round(($education['Grad']/$total_records)*100,2)}}%)</strong><small>Graduate</small></li>
+                  <li class="col-md-2 col-sm-4 col-xs-4"><strong>{{$education['Masters']}}<br>({{round(($education['Masters']/$total_records)*100,2)}}%)</strong><small>Masters</small></li>
+                  <li class="col-md-2 col-sm-4 col-xs-4"><strong><br>{{$total_records}}</strong><small>Total</small></li>
                 </ul>
               </div>
             </div>
@@ -128,7 +149,7 @@
 
           <div class="clearfix"></div>
 
-          <div class="col-md-8 col-sm-12 bootstrap-grid">            
+          <div class="col-md-12 col-sm-12 bootstrap-grid">            
             <!-- New widget -->
             <div class="powerwidget powerwidget-as-portlet powerwidget-as-portlet-green-alt" id="occupation" data-widget-editbutton="false">
               <header><b>Occupation</b></header>
@@ -136,15 +157,15 @@
                 <div class="portlet-big-icon animated bounceIn"><i class="fa fa-pied-piper-alt"></i></div>
                 <ul class="portlet-bottom-block">
 
-                  <li class="col-md-2 col-sm-2 col-xs-2"><strong>{{$occupation['Student']}}({{round(($occupation['Student']/$total_records)*100,2)}}%)</strong><small>Student</small></li>
+                  <li class="col-md-2 col-sm-2 col-xs-2"><strong>{{$occupation['Student']}}<br>({{round(($occupation['Student']/$total_records)*100,2)}}%)</strong><small>Student</small></li>
 
-                  <li class="col-md-2 col-sm-2 col-xs-2"><strong>{{$occupation['Housewife']}}({{round(($occupation['Housewife']/$total_records)*100,2)}}%)</strong><small>Housewife</small></li>
+                  <li class="col-md-2 col-sm-2 col-xs-2"><strong>{{$occupation['Housewife']}}<br>({{round(($occupation['Housewife']/$total_records)*100,2)}}%)</strong><small>Housewife</small></li>
 
-                  <li class="col-md-3 col-sm-3 col-xs-3"><strong>{{$occupation['Service Holder'] }}({{round(($occupation['Service Holder']/$total_records)*100,2)}}%)</strong><small>Service Holder</small></li>
+                  <li class="col-md-3 col-sm-3 col-xs-3"><strong>{{$occupation['Service Holder'] }}<br>({{round(($occupation['Service Holder']/$total_records)*100,2)}}%)</strong><small>Service Holder</small></li>
 
-                  <li class="col-md-3 col-sm-3 col-xs-3"><strong>{{$occupation['Owner of a Business']}}({{round(($occupation['Owner of a Business']/$total_records)*100,2)}}%)</strong><small>Owner of a Business</small></li>
+                  <li class="col-md-3 col-sm-3 col-xs-3"><strong>{{$occupation['Owner of a Business']}}<br>({{round(($occupation['Owner of a Business']/$total_records)*100,2)}}%)</strong><small>Owner of a Business</small></li>
 
-                  <li class="col-md-2 col-sm-2 col-xs-2"><strong>{{$total_records}}</strong><small>Total</small></li>
+                  <li class="col-md-2 col-sm-2 col-xs-2"><strong><br>{{$total_records}}</strong><small>Total</small></li>
 
                 </ul>
               </div>
@@ -153,22 +174,7 @@
           </div>
           <!-- /Inner Row Col-md-8 -->
 
-            <div class="col-md-4 col-sm-6 bootstrap-grid">
-              <!-- New widget -->
-              <div class="powerwidget powerwidget-as-portlet powerwidget-as-portlet-dark-blue" id="sales" data-widget-editbutton="false">
-              <header><b>Sales</b></header>
-              <div class="inner-spacer nopadding">
-                <div class="portlet-big-icon animated bounceIn text-white"><i class="fa fa-money"></i></div>
-                <ul class="portlet-bottom-block">
-                  <li class="col-md-4 col-sm-4 col-xs-4"><strong>{{$yes}}({{round(($yes/$total_records)*100,2)}}%)</strong><small>Yes</small></li>
-                  <li class="col-md-4 col-sm-4 col-xs-4"><strong>{{$no}}({{round(($no/$total_records)*100,2)}}%)</strong><small>No</small></li>
-                  <li class="col-md-4 col-sm-4 col-xs-4"><strong>{{$total_records}}</strong><small>Total</small></li>
-                </ul>
-              </div>
-            </div>
-            <!-- /New widget -->
-            </div>
-            <!-- /Inner Row Col-md-4 -->
+
 
           <div class="clearfix"></div>
           <div class="col-md-12 col-sm-12 bootstrap-grid"> 
@@ -184,19 +190,19 @@
                      <?php $sum+=$amount;?>
                 @endforeach
 
-                  <li class="col-md-2 col-sm-2 col-xs-2"><strong>{{$products['FAL']}}({{round(($products['FAL']/$sum)*100,2)}}%)</strong><small>FAL</small></li>
+                  <li class="col-md-1 col-sm-2 col-xs-2"><strong>{{$products['FAL']}}<br>({{round(($products['FAL']/$sum)*100,2)}}%)</strong><small>FAL</small></li>
 
-                  <li class="col-md-2 col-sm-2 col-xs-2"><strong>{{$products['PDF']}}({{round(($products['PDF']/$sum)*100,2)}}%)</strong><small>PDF</small></li>
+                  <li class="col-md-1 col-sm-2 col-xs-2"><strong>{{$products['PDF']}}<br>({{round(($products['PDF']/$sum)*100,2)}}%)</strong><small>PDF</small></li>
 
-                  <li class="col-md-2 col-sm-2 col-xs-2"><strong>{{$products['PWB']}}({{round(($products['PWB']/$sum)*100,2)}}%)</strong><small>PWB</small></li>
+                  <li class="col-md-2 col-sm-2 col-xs-2"><strong>{{$products['PWB']}}<br>({{round(($products['PWB']/$sum)*100,2)}}%)</strong><small>PWB</small></li>
 
-                  <li class="col-md-2 col-sm-2 col-xs-2"><strong>{{$products['PNS']}}({{round(($products['PNS']/$sum)*100,2)}}%)</strong><small>PNS</small></li>
+                  <li class="col-md-2 col-sm-2 col-xs-2"><strong>{{$products['PNS']}}<br>({{round(($products['PNS']/$sum)*100,2)}}%)</strong><small>PNS</small></li>
 
-                  <li class="col-md-2 col-sm-2 col-xs-"><strong>{{$products['PPC']}}({{round(($products['PPC']/$sum)*100,2)}}%)</strong><small>PPC</small></li>
+                  <li class="col-md-2 col-sm-2 col-xs-"><strong>{{$products['PPC']}}<br>({{round(($products['PPC']/$sum)*100,2)}}%)</strong><small>PPC</small></li>
 
-                  <li class="col-md-1 col-sm-1 col-xs-1"><strong>{{$products['DBM']}}({{round(($products['DBM']/$sum)*100,2)}}%)</strong><small>DBM</small></li>
+                  <li class="col-md-2 col-sm-1 col-xs-1"><strong>{{$products['DBM']}}<br>({{round(($products['DBM']/$sum)*100,2)}}%)</strong><small>DBM</small></li>
 
-                  <li class="col-md-1 col-sm-1 col-xs-1"><strong>{{$sum}}</strong><small>Total</small></li>
+                  <li class="col-md-2 col-sm-1 col-xs-1"><strong><br>{{$sum}}</strong><small>Total</small></li>
                 </ul>
               </div>
             </div>

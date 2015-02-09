@@ -61,6 +61,7 @@
       <li>{{link_to('messages/index','Index Page')}}</li>
       <li>{{link_to('percentage/index','Percentage Page')}}</li>
       <li>{{link_to('table/index','Table Page')}}</li>
+      <li>{{link_to('bplist','BP List')}}</li>
     </ul>
     </div>
     <!--/MainMenu-->
@@ -109,15 +110,15 @@
                       <th>Occupation</th>
                       <th>BP Name</th><!-- new -->
                       <th>BP Mobile</th><!-- new -->                      
-                      <th>Coupon No</th>
-                      <th>Currently Used Product</th>
+                      <th>Coupon</th>
+                      <th>Used Product</th>
                       <th>Sales Status</th>
-                      <th>Fair &amp; Lovely Facewash 50g</th>
-                      <th>Pond's Daily Facewash 60g</th>
-                      <th>Pond's White Beauty Facewash 50g</th>
-                      <th>Pond's Nourishing Scrub Facewash 60g</th>
-                      <th>Pond's Pimple Clear White Facewash 50g</th>
-                      <th>Dove Beauty Moisture Facewash 50g</th>
+                      <th>FAL</th>
+                      <th>PDF</th>
+                      <th>PWB</th>
+                      <th>PNS</th>
+                      <th>PPC</th>
+                      <th>DMB</th>
                       <th>Error</th><!-- new -->                    
                       <th>Date</th><!-- new -->
                       </tr>
@@ -125,7 +126,7 @@
                   <tbody>
                   @foreach($datas as $data)
                     <tr>
-                      <td>{{$data->customer_name}}</td>
+                      <td <?php if(isset($data->error)){ echo 'class="bg-red1"'; } ?>>{{$data->customer_name}}</td>
                       <td>{{$data->age}}</td>
                       <td>{{$data->gender}}</td>
                       <td>{{$data->customer_mobile}}</td>
@@ -153,19 +154,18 @@
                       <td>{{$data->PNS}}</td>
                       <td>{{$data->PPC}}</td>
                       <td>{{$data->DBM}}</td>
-                      <td>
                       <?php
                         try{
                             $e = json_decode($data->error);
                             
-                            foreach ($e as $key => $value) {
-                              echo "<td>"."#".$value."<br>"."</td>";
+                            foreach ($e as $key => $value) 
+                            {
+                              echo '<td>'.'#'.$value.'<br>'.'</td>';
                             }
                         }catch(Exception $e){
                             echo "<td>"." "."</td>";
                         }
                       ?>
-                      </td>
                       <td>{{$data->created_at}}</td>
                     </tr>
                     @endforeach
@@ -182,18 +182,18 @@
                       <th>Education</th>
                       <th>Occupation</th>
                       <th>BP Name</th><!-- new -->
-                      <th>BP Mobile</th><!-- new --> 
-                      <th>Coupon No</th>
-                      <th>Currently Used Product</th>
+                      <th>BP Mobile</th><!-- new -->                      
+                      <th>Coupon</th>
+                      <th>Used Product</th>
                       <th>Sales Status</th>
-                      <th>Fair &amp; Lovely Facewash 50g</th>
-                      <th>Pond's Daily Facewash 60g</th>
-                      <th>Pond's White Beauty Facewash 50g</th>
-                      <th>Pond's Nourishing Scrub Facewash 60g</th>
-                      <th>Pond's Pimple Clear White Facewash 50g</th>
-                      <th>Dove Beauty Moisture Facewash 50g</th>
+                      <th>FAL</th>
+                      <th>PDF</th>
+                      <th>PWB</th>
+                      <th>PNS</th>
+                      <th>PPC</th>
+                      <th>DMB</th>
                       <th>Error</th><!-- new -->                    
-                      <th>Date</th><!-- new -->                    
+                      <th>Date</th><!-- new -->
                     </tr>
                   </tfoot>
                 </table>

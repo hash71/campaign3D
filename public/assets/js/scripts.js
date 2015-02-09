@@ -1,5 +1,6 @@
 //ORB JavaScript
 // DOM Preload
+var oTable2=null;
 (function ($) {
 
     "use strict";
@@ -2522,9 +2523,9 @@
                                     {
                                          type: "select",
                                          values: [ 'Y', 'N' ]
-                                    },{type:"text"},{type:"text"},{type:"text"},{type:"text"},{type:"text"},{type:"text"}
-                                 ]
-               }
+                                    },{type:"select"},{type:"select"},{type:"select"},{type:"select"},{type:"select"},{type:"select"},{type:"select"},{type:"select"},{type:"text"},{type:"text"}
+                                 ]                                 
+               }              
                 );
 
                 $("tfoot input").keyup(function () {
@@ -2551,6 +2552,62 @@
                     }
                 });
             }
+
+
+
+
+            //Table BP List
+
+
+            if ($('#table-bplist').length) {
+                oTable2 = $('#table-bplist').dataTable({
+                    "oLanguage": {
+                        "sSearch": "Search all columns:"
+                    },
+                    "sDom": 'C<"clear">lfrtip',
+                    colVis: {
+                        order: 'alfa'
+                    }
+                }).columnFilter(
+                    {
+                     aoColumns: [
+                                    {
+                                         type: "text"
+                                    },
+                                    {
+                                         type: "text"
+                                    },
+                                    {
+                                         type: "text"
+                                    }
+                                 ]                                 
+                    }              
+                );
+
+                $("tfoot input").keyup(function () {
+                    /* Filter on the column (the index) of this element */
+                    oTable.fnFilter(this.value, $("tfoot input").index(this));
+                });
+
+
+                $("tfoot input").each(function (i) {
+                    asInitVals[i] = this.value;
+                });
+
+                $("tfoot input").focus(function () {
+                    if (this.className == "search_init") {
+                        this.className = "";
+                        this.value = "";
+                    }
+                });
+
+                $("tfoot input").blur(function (i) {
+                    if (this.value === "") {
+                        this.className = "search_init";
+                        this.value = asInitVals[$("tfoot input").index(this)];
+                    }
+                });
+            }            
 
 
             // if there's google maps script on the page
