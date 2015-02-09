@@ -8,7 +8,7 @@ class PercentageController extends \BaseController {
 						->whereNull('error')
 						->count();
 
-		
+		// return $total_records;
 		$males = DB::table('message')
 				->whereNull('error')
 				->where('gender','M')

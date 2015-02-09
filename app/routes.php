@@ -3,17 +3,14 @@
 
 
 
-use Faker\Factory as Faker;
+// Route::get('dummy_user',function(){
 
+// 	User::create([
+// 			'email'=>'analyzen@gmail.com',
+// 			'password'=>Hash::make('analyzen')
+// 	]);
 
-Route::get('dummy_user',function(){
-
-	User::create([
-			'email'=>'analyzen@gmail.com',
-			'password'=>Hash::make('analyzen')
-	]);
-
-});
+// });
 
 Route::get('newapi/{token}/{bp_mobile}/{message}','MessagesController@newcreate');
 
@@ -29,8 +26,26 @@ Route::group(['before'=>'auth'], function(){
 
 Route::controller('users', 'UsersController');
 
-Route::get('/profile', function(){
-	return View::make('profile');
+
+Route::get('/profile/{id}', function($id){
+	
+	// $t = DB::table('message')->where();
+
+	// return dd(json_decode($t->error));
+	// 0192614659
+	// $bp = DB::table('bp_info')->where('mobile','0192614659')->pluck('id');
+	// return $bp;
+	$bp = DB::table('bp_info')->find($id);
+
+	$messages = DB::table('message')
+				->where('bp_mobile',$bp->mobile)
+				->orderBy('created_at','desc')
+				->get();
+
+	// return dd($messages);
+
+	return View::make('profile',compact('bp','messages'));
+
 });
 
 Route::get('/', function(){	

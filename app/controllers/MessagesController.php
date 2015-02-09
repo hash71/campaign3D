@@ -243,7 +243,7 @@ class MessagesController extends \BaseController {
 
 									if( strlen($msg->customer_mobile) != 11 ){
 
-										$errors['mobile_blank'] = "Customer mobile field not 11 digit";
+										$errors['mobile_invalid'] = "Customer mobile field not 11 digit";
 									}
 								}
 

@@ -12,7 +12,7 @@ class CouponTableSeeder extends Seeder {
 		foreach(range(1, 100) as $index)
 		{
 			DB::table('coupon')->insert([
-				'coupon_code'=>$faker->randomNumber($nbDigits = 8),				
+				'coupon_code'=>$faker->randomNumber($nbDigits = 8)			
 			]);
 		}
 	}

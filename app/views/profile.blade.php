@@ -8,11 +8,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Profile</title>
 
-<link href="assets/css/datepicker.css" rel="stylesheet" type="text/css">
-<link href="assets/css/styles.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/datepicker.css" rel="stylesheet" type="text/css">
+<link href="../assets/css/styles.css" rel="stylesheet" type="text/css">
 
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-<script type="text/javascript" src="assets/js/vendors/modernizr/modernizr.custom.js"></script>
+<script type="text/javascript" src="../assets/js/vendors/modernizr/modernizr.custom.js"></script>
 </head>
 
 <body>
@@ -115,21 +115,21 @@
                           <table class="table">
                             <tr>
                               <td><strong>Name:</strong></td>
-                              <td>Jon Doe</td>
+                              <td>{{$bp->name}}</td>
                               <td><strong>Mobile:</strong></td>
-                              <td>23 4554 453</td>
+                              <td>{{$bp->mobile}}</td>
                             </tr>
                             <tr>
                               <td><strong>Region:</strong></td>
-                              <td>Region Name</td>
+                              <td>{{$bp->region}}</td>
                               <td><strong>District:</strong></td>
-                              <td>District Name</td>
+                              <td>{{$bp->district}}</td>
                             </tr>
                             <tr>
                               <td><strong>Team:</strong></td>
-                              <td>Team Name</td>
+                              <td>{{$bp->team}}</td>
                               <td><strong>LSA Code:</strong></td>
-                              <td>234985AeIIP</td>
+                              <td>{{$bp->lsa_code}}</td>
                             </tr>
                           </table>
                         </div>
@@ -137,58 +137,36 @@
                         <div class="tab-pane" id="activity">
                           <div class="profile-header">Activity</div>
                           <ul class="tmtimeline">
-                            <li>
-                              <time class="tmtime" datetime="2013-04-10 18:30"><span>4/10/13</span> <span>18:30</span></time>
-                              <div class="tmicon bg-green fa-check"></div>
-                              <div class="tmlabel">
-                                <h2>Added photo</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam cursus turpis quis neque imperdiet, eleifend feugiat erat consectetur. Donec eget fringilla lorem, eget auctor sapien.</p>
-                              </div>
-                            </li>
-                            <li>
-                              <time class="tmtime" datetime="2013-04-11T12:04"><span>4/11/13</span> <span>12:04</span></time>
+
+                          @foreach($messages as $message)
+
+                            @if(json_decode($message->error))
+                             
+                              <li>
+                              <time class="tmtime" datetime="{{$message->created_at}}"><span>{{date('Y-m-d',strtotime($message->created_at))}}</span> <span>{{date('h:i:s',strtotime($message->created_at))}}</span></time>
                               <div class="tmicon bg-red fa-times"></div>
                               <div class="tmlabel">
-                                <h2>Added comment</h2>
-                                <p>Caulie dandelion maize lentil collard greens radish arugula 
-                                  sweet pepper water spinach kombu courgette lettuce. Celery coriander 
-                                  bitterleaf epazote radicchio shallot winter purslane collard greens 
-                                  spring onion squash lentil. Artichoke salad bamboo shoot black-eyed pea 
-                                  brussels sprout garlic kohlrabi.</p>
+                                <h2>Error</h2>
+                                <p>{{$message->error}}</p>
+                                <h2>Message</h2>
+                                <p>{{$message->full_message?$msg->full_message:"This is the full message"}}</p>
                               </div>
-                            </li>
+                              </li>
+
+                            @endif
+
                             <li>
-                              <time class="tmtime" datetime="2013-04-13 05:36"><span>4/13/13</span> <span>05:36</span></time>
+                              <time class="tmtime" datetime="{{$message->created_at}}"><span>{{date('Y-m-d',strtotime($message->created_at))}}</span> <span>{{date('h:i:s',strtotime($message->created_at))}}</span></time>
                               <div class="tmicon bg-green fa-check"></div>
                               <div class="tmlabel">
-                                <h2>Drinked tea</h2>
-                                <p>Nam tincidunt neque nec est bibendum, ut cursus nulla egestas. Etiam at mi vel sem viverra euismod. Nam scelerisque metus urna, ut facilisis augue dictum quis.</p>
+                                <h2>Message</h2>                                
+                                <p>{{$message->full_message?$msg->full_message:"This is the full message"}}</p>
                               </div>
                             </li>
-                            <li>
-                              <time class="tmtime" datetime="2013-04-15 13:15"><span>4/15/13</span> <span>13:15</span></time>
-                              <div class="tmicon bg-red fa-times"></div>
-                              <div class="tmlabel">
-                                <h2>Uploaded files to cloud</h2>
-                                <p> Donec fringilla metus dui, placerat pulvinar lectus elementum ullamcorper. Quisque dignissim nulla at purus volutpat placerat. In a justo purus.</p>
-                              </div>
-                            </li>
-                            <li>
-                              <time class="tmtime" datetime="2013-04-16 21:30"><span>4/16/13</span> <span>21:30</span></time>
-                              <div class="tmicon bg-green fa-check"></div>
-                              <div class="tmlabel">
-                                <h2>Falling in love</h2>
-                                <p>Fusce pretium nibh eros, at adipiscing neque euismod eget. Suspendisse sollicitudin justo vel urna sollicitudin, sed pellentesque dolor ultricies.</p>
-                              </div>
-                            </li>
-                            <li>
-                              <time class="tmtime" datetime="2013-04-17 12:11"><span>4/17/13</span> <span>12:11</span></time>
-                              <div class="tmicon bg-green fa-check"></div>
-                              <div class="tmlabel">
-                                <h2>Giving Some Likes</h2>
-                                <p> Fusce feugiat ornare libero sed gravida. Aenean metus est, suscipit nec condimentum ac, facilisis eget lorem. Suspendisse rutrum lorem orci. Ut in ligula neque. Phasellus a enim at leo pellentesque dapibus. Integer dignissim sem eu venenatis facilisis. Sed quis neque nec lectus gravida euismod. Nam sollicitudin, nisl nec lacinia blandit, magna felis pharetra enim, et lacinia metus ipsum et est.</p>
-                              </div>
-                            </li>
+
+
+                          @endforeach
+                          
                           </ul>
                         </div>
 
@@ -196,58 +174,24 @@
                         <div class="tab-pane" id="errorActivity">
                           <div class="profile-header">Error Activity</div>
                           <ul class="tmtimeline">
-                            <li>
-                              <time class="tmtime" datetime="2013-04-10 18:30"><span>4/10/13</span> <span>18:30</span></time>
+                             @foreach($messages as $message)
+
+                            @if(json_decode($message->error))
+                             
+                              <li>
+                              <time class="tmtime" datetime="{{$message->created_at}}"><span>{{date('Y-m-d',strtotime($message->created_at))}}</span> <span>{{date('h:i:s',strtotime($message->created_at))}}</span></time>
                               <div class="tmicon bg-red fa-times"></div>
                               <div class="tmlabel">
-                                <h2>Added photo</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam cursus turpis quis neque imperdiet, eleifend feugiat erat consectetur. Donec eget fringilla lorem, eget auctor sapien.</p>
+                                <h2>Error</h2>
+                                <p>{{$message->error}}</p>
+                                <h2>Message</h2>
+                                <p>{{$message->full_message?$msg->full_message:"This is the full message"}}</p>
                               </div>
-                            </li>
-                            <li>
-                              <time class="tmtime" datetime="2013-04-11T12:04"><span>4/11/13</span> <span>12:04</span></time>
-                              <div class="tmicon bg-red fa-times"></div>
-                              <div class="tmlabel">
-                                <h2>Added comment</h2>
-                                <p>Caulie dandelion maize lentil collard greens radish arugula 
-                                  sweet pepper water spinach kombu courgette lettuce. Celery coriander 
-                                  bitterleaf epazote radicchio shallot winter purslane collard greens 
-                                  spring onion squash lentil. Artichoke salad bamboo shoot black-eyed pea 
-                                  brussels sprout garlic kohlrabi.</p>
-                              </div>
-                            </li>
-                            <li>
-                              <time class="tmtime" datetime="2013-04-13 05:36"><span>4/13/13</span> <span>05:36</span></time>
-                              <div class="tmicon bg-red fa-times"></div>
-                              <div class="tmlabel">
-                                <h2>Drinked tea</h2>
-                                <p>Nam tincidunt neque nec est bibendum, ut cursus nulla egestas. Etiam at mi vel sem viverra euismod. Nam scelerisque metus urna, ut facilisis augue dictum quis.</p>
-                              </div>
-                            </li>
-                            <li>
-                              <time class="tmtime" datetime="2013-04-15 13:15"><span>4/15/13</span> <span>13:15</span></time>
-                              <div class="tmicon bg-red fa-times"></div>
-                              <div class="tmlabel">
-                                <h2>Uploaded files to cloud</h2>
-                                <p> Donec fringilla metus dui, placerat pulvinar lectus elementum ullamcorper. Quisque dignissim nulla at purus volutpat placerat. In a justo purus.</p>
-                              </div>
-                            </li>
-                            <li>
-                              <time class="tmtime" datetime="2013-04-16 21:30"><span>4/16/13</span> <span>21:30</span></time>
-                              <div class="tmicon bg-red fa-times"></div>
-                              <div class="tmlabel">
-                                <h2>Falling in love</h2>
-                                <p>Fusce pretium nibh eros, at adipiscing neque euismod eget. Suspendisse sollicitudin justo vel urna sollicitudin, sed pellentesque dolor ultricies.</p>
-                              </div>
-                            </li>
-                            <li>
-                              <time class="tmtime" datetime="2013-04-17 12:11"><span>4/17/13</span> <span>12:11</span></time>
-                              <div class="tmicon bg-red fa-times"></div>
-                              <div class="tmlabel">
-                                <h2>Giving Some Likes</h2>
-                                <p> Fusce feugiat ornare libero sed gravida. Aenean metus est, suscipit nec condimentum ac, facilisis eget lorem. Suspendisse rutrum lorem orci. Ut in ligula neque. Phasellus a enim at leo pellentesque dapibus. Integer dignissim sem eu venenatis facilisis. Sed quis neque nec lectus gravida euismod. Nam sollicitudin, nisl nec lacinia blandit, magna felis pharetra enim, et lacinia metus ipsum et est.</p>
-                              </div>
-                            </li>
+                              </li>
+
+                            @endif                           
+
+                           @endforeach
                           </ul>
                         </div>
                       </div>
@@ -334,66 +278,66 @@
 
 <!--Scripts--> 
 <!--JQuery--> 
-<script type="text/javascript" src="assets/js/vendors/jquery/jquery.min.js"></script> 
-<script type="text/javascript" src="assets/js/vendors/jquery/jquery-ui.min.js"></script> 
+<script type="text/javascript" src="../assets/js/vendors/jquery/jquery.min.js"></script> 
+<script type="text/javascript" src="../assets/js/vendors/jquery/jquery-ui.min.js"></script> 
 
 <script>
 $('.powerwidget > header').on('touchstart', function(event){});
 </script>
 
 <!--EasyPieChart--> 
-<script type="text/javascript" src="assets/js/vendors/easing/jquery.easing.1.3.min.js"></script> 
-<script type="text/javascript" src="assets/js/vendors/easypie/jquery.easypiechart.min.js"></script> 
+<script type="text/javascript" src="../assets/js/vendors/easing/jquery.easing.1.3.min.js"></script> 
+<script type="text/javascript" src="../assets/js/vendors/easypie/jquery.easypiechart.min.js"></script> 
 
 <!--Fullscreen--> 
-<script type="text/javascript" src="assets/js/vendors/fullscreen/screenfull.min.js"></script> 
+<script type="text/javascript" src="../assets/js/vendors/fullscreen/screenfull.min.js"></script> 
 
 <!--NanoScroller 
-<script type="text/javascript" src="assets/js/vendors/nanoscroller/jquery.nanoscroller.min.js"></script> -->
+<script type="text/javascript" src="../assets/js/vendors/nanoscroller/jquery.nanoscroller.min.js"></script> -->
 
 <!--Sparkline--> 
-<script type="text/javascript" src="assets/js/vendors/sparkline/jquery.sparkline.min.js"></script> 
+<script type="text/javascript" src="../assets/js/vendors/sparkline/jquery.sparkline.min.js"></script> 
 
 <!--Horizontal Dropdown--> 
-<script type="text/javascript" src="assets/js/vendors/horisontal/cbpHorizontalSlideOutMenu.js"></script> 
-<script type="text/javascript" src="assets/js/vendors/classie/classie.js"></script> 
+<script type="text/javascript" src="../assets/js/vendors/horisontal/cbpHorizontalSlideOutMenu.js"></script> 
+<script type="text/javascript" src="../assets/js/vendors/classie/classie.js"></script> 
 
 <!--PowerWidgets--> 
-<script type="text/javascript" src="assets/js/vendors/powerwidgets/powerwidgets.min.js"></script> 
+<script type="text/javascript" src="../assets/js/vendors/powerwidgets/powerwidgets.min.js"></script> 
 
 <!--Morris Chart--> 
-<script type="text/javascript" src="assets/js/vendors/raphael/raphael-min.js"></script> 
-<script type="text/javascript" src="assets/js/vendors/morris/morris.min.js"></script> 
+<script type="text/javascript" src="../assets/js/vendors/raphael/raphael-min.js"></script> 
+<script type="text/javascript" src="../assets/js/vendors/morris/morris.min.js"></script> 
 
 <!--FlotChart--> 
-<script type="text/javascript" src="assets/js/vendors/flotchart/jquery.flot.min.js"></script> 
-<script type="text/javascript" src="assets/js/vendors/flotchart/jquery.flot.resize.min.js"></script> 
-<script type="text/javascript" src="assets/js/vendors/flotchart/jquery.flot.axislabels.js"></script>
-<script type="text/javascript" src="assets/js/vendors/flotchart/jquery.flot.pie.min.js"></script> 
+<script type="text/javascript" src="../assets/js/vendors/flotchart/jquery.flot.min.js"></script> 
+<script type="text/javascript" src="../assets/js/vendors/flotchart/jquery.flot.resize.min.js"></script> 
+<script type="text/javascript" src="../assets/js/vendors/flotchart/jquery.flot.axislabels.js"></script>
+<script type="text/javascript" src="../assets/js/vendors/flotchart/jquery.flot.pie.min.js"></script> 
 
 <!--Chart.js--> 
-<script type="text/javascript" src="assets/js/vendors/chartassets/js/chart.min.js"></script> 
+<script type="text/javascript" src="../assets/js/vendors/chart../assets/js/chart.min.js"></script> 
 
 <!--Calendar--> 
-<script type="text/javascript" src="assets/js/vendors/fullcalendar/fullcalendar.min.js"></script> 
-<script type="text/javascript" src="assets/js/vendors/fullcalendar/gcal.js"></script> 
+<script type="text/javascript" src="../assets/js/vendors/fullcalendar/fullcalendar.min.js"></script> 
+<script type="text/javascript" src="../assets/js/vendors/fullcalendar/gcal.js"></script> 
 
 <!--Bootstrap--> 
-<script type="text/javascript" src="assets/js/vendors/bootstrap/bootstrap.min.js"></script> 
+<script type="text/javascript" src="../assets/js/vendors/bootstrap/bootstrap.min.js"></script> 
 
 <!--Vector Map--> 
-<script type="text/javascript" src="assets/js/vendors/vector-map/jquery.vmap.min.js"></script> 
-<script type="text/javascript" src="assets/js/vendors/vector-map/jquery.vmap.sampledata.js"></script> 
-<script type="text/javascript" src="assets/js/vendors/vector-map/jquery.vmap.world.js"></script>
+<script type="text/javascript" src="../assets/js/vendors/vector-map/jquery.vmap.min.js"></script> 
+<script type="text/javascript" src="../assets/js/vendors/vector-map/jquery.vmap.sampledata.js"></script> 
+<script type="text/javascript" src="../assets/js/vendors/vector-map/jquery.vmap.world.js"></script>
 
 <!--Datepicker--> 
-<script type="text/javascript" src="assets/js/vendors/datepicker/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="../assets/js/vendors/datepicker/bootstrap-datepicker.js"></script>
 
 <!--ToDo--> 
-<script type="text/javascript" src="assets/js/vendors/todos/todos.js"></script> 
+<script type="text/javascript" src="../assets/js/vendors/todos/todos.js"></script> 
 
 <!--Main App--> 
-<script type="text/javascript" src="assets/js/scripts.js"></script>
+<script type="text/javascript" src="../assets/js/scripts.js"></script>
 
         <script type="text/javascript">
             // When the document is ready
