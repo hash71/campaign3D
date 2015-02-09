@@ -107,6 +107,8 @@
                       <th>District</th>
                       <th>Education</th>
                       <th>Occupation</th>
+                      <th>BP Name</th><!-- new -->
+                      <th>BP Mobile</th><!-- new -->                      
                       <th>Coupon No</th>
                       <th>Currently Used Product</th>
                       <th>Sales Status</th>
@@ -116,7 +118,9 @@
                       <th>Pond's Nourishing Scrub Facewash 60g</th>
                       <th>Pond's Pimple Clear White Facewash 50g</th>
                       <th>Dove Beauty Moisture Facewash 50g</th>
-                    </tr>
+                      <th>Error</th><!-- new -->                    
+                      <th>Date</th><!-- new -->
+                      </tr>
                   </thead>
                   <tbody>
                   @foreach($datas as $data)
@@ -135,6 +139,8 @@
                       <td>{{$tmp = DB::table('education_info')->where('id',$data->education_id)->pluck('name')}}</td>
                       
                       <td>{{$tmp = DB::table('occupation')->where('id',$data->occupation_id)->pluck('occupation_name')}}</td>
+                      <td>{{DB::table('bp_info')->where('mobile',$data->bp_mobile)->pluck('name')}}</td>
+                      <td>{{$data->bp_mobile}}</td>
 
                       <td>{{$data->coupon_code}}</td>
                       <td>{{$tmp = DB::table('currently_used_product')->where('id',$data->currently_used_product_table_id)->pluck('product')}}</td>
@@ -147,6 +153,20 @@
                       <td>{{$data->PNS}}</td>
                       <td>{{$data->PPC}}</td>
                       <td>{{$data->DBM}}</td>
+                      <td>
+                      <?php
+                        try{
+                            $e = json_decode($data->error);
+                            
+                            foreach ($e as $key => $value) {
+                              echo "<td>"."#".$value."<br>"."</td>";
+                            }
+                        }catch(Exception $e){
+                            echo "<td>"." "."</td>";
+                        }
+                      ?>
+                      </td>
+                      <td>{{$data->created_at}}</td>
                     </tr>
                     @endforeach
                   </tbody>
@@ -161,6 +181,8 @@
                       <th>District</th>
                       <th>Education</th>
                       <th>Occupation</th>
+                      <th>BP Name</th><!-- new -->
+                      <th>BP Mobile</th><!-- new --> 
                       <th>Coupon No</th>
                       <th>Currently Used Product</th>
                       <th>Sales Status</th>
@@ -170,6 +192,8 @@
                       <th>Pond's Nourishing Scrub Facewash 60g</th>
                       <th>Pond's Pimple Clear White Facewash 50g</th>
                       <th>Dove Beauty Moisture Facewash 50g</th>
+                      <th>Error</th><!-- new -->                    
+                      <th>Date</th><!-- new -->                    
                     </tr>
                   </tfoot>
                 </table>

@@ -93,11 +93,12 @@
               <div class="inner-spacer nopadding">
                 <div class="portlet-big-icon animated bounceIn text-white"><i class="fa fa-male"></i><i class="fa fa-female"></i></div>
                 <ul class="portlet-bottom-block">
-                  <li class="col-md-4 col-sm-4 col-xs-4"><strong>{{$males}}({{round(($males/$total_records)*100,2)}}%)</strong><small>Male</small></li>
+                  <li class="col-md-4 col-sm-4 col-xs-4">
+                  <strong>{{$males}}<br>({{round(($males/$total_records)*100,2)}}%)</strong><small>Male</small></li>
 
-                  <li class="col-md-4 col-sm-4 col-xs-4"><strong>{{$females}}({{round(($females/$total_records)*100,2)}}%)</strong><small>Female</small></li>
+                  <li class="col-md-4 col-sm-4 col-xs-4"><strong>{{$females}}<br>({{round(($females/$total_records)*100,2)}}%)</strong><small>Female</small></li>
 
-                  <li class="col-md-4 col-sm-4 col-xs-4"><strong>{{$total_records}}</strong><small>total</small></li>
+                  <li class="col-md-4 col-sm-4 col-xs-4"><strong>{{$total_records}}<br>{{"<br>"}}</strong><small>total</small></li>
                 </ul>
               </div>
             </div>
