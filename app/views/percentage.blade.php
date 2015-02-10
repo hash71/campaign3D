@@ -176,7 +176,7 @@
             
             <!-- New widget -->
             <div class="powerwidget powerwidget-as-portlet powerwidget-as-portlet-purple" id="curUsedProduct" data-widget-editbutton="false">
-              <header><b>Currently Used Product</b></header>
+              <header><b>Sold Products</b></header>
               <div class="inner-spacer nopadding">
                 <div class="portlet-big-icon animated bounceIn"><i class="glyphicon glyphicon-magnet"></i></div>
                 <ul class="portlet-bottom-block">
