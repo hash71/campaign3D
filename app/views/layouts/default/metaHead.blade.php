@@ -9,7 +9,7 @@
 
 {{HTML::style('assets/css/daterangepicker-bs3.css')}}
 {{HTML::style('assets/css/styles.css')}}
-{{HTML::image('favicon.ico',"",['rel'=>'shortcut icon','type'=>'image/x-icon'])}}
+
 {{HTML::script('assets/js/vendors/modernizr/modernizr.custom.js')}}
 
 </head>

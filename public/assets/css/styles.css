@@ -9285,3 +9285,7 @@ code {
 {
 	background-color:#E5D3D3 !important;
 }
+
+.navbar-brand{
+	padding: 7px 20px;
+}

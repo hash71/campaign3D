@@ -1,13 +1,6 @@
 <!--Navigation-->
-<nav class="main-header clearfix" role="navigation"> <a class="navbar-brand" href="index.html"><span class="text-blue">ORB</span></a> 
+<nav class="main-header clearfix" role="navigation"> <a class="navbar-brand" href="{{URL::to('messages/index')}}"><img src="../assets/images/logo1.png"></a> 
   
-  <!--Search-->
-  <div class="site-search">
-    <form action="#" id="inline-search">
-      <i class="fa fa-search"></i>
-      <input type="search" placeholder="Search">
-    </form>
-  </div>
   
   <!--Navigation Itself-->    
   <div class="navbar-content">

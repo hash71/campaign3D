@@ -87,27 +87,10 @@ Route::get('newapi/{token}/{bp_mobile}/{message}','MessagesController@newcreate'
 	
 // })->before('auth');
 
-Route::get('timeline1',function(){	
-	
-	$start = date("Y-m-d");
+Route::get('timeline',function(){	
 
-	$end = date('Y-m-d',strtotime('+1 day',strtotime($start)));
 
-	$messages = DB::table('message')
-				->where('created_at','>=',$start)
-				->where('created_at','<',$end)
-				->orderBy('created_at','desc')								
-				->get();	
-
-	DB::table('session')->where('id',1)->update(['value'=>sizeof($messages)]);	
-
-	return dd($messages);
-	
-	return View::make('timeline',compact('messages'));
-	
-})->before('auth');
-
-Route::get('timeline2', function(){			
+	if(Request::ajax()){			
 
 		$start = date("Y-m-d");
 
@@ -121,8 +104,11 @@ Route::get('timeline2', function(){
 		$new_msg =$total - DB::table('session')->where('id',1)->pluck('value');
 		
 		if($new_msg == 0){
-			return "no new msg";
+			$messages = null;
+			return $messages;
 		}
+
+		// return View::make('timelineajax',compact('messages'));	
 
 		$messages = DB::table('message')
 				->orderBy('created_at','desc')	
@@ -131,11 +117,34 @@ Route::get('timeline2', function(){
 
 		$id = DB::table('session')->where('id',1)->update(['value'=>$total]);
 		
-		return dd($messages);		
+		// return dd($messages);		
 
 		return View::make('timelineajax',compact('messages'));	
 	
-});
+	}
+	
+	$start = date("Y-m-d");
+
+	$end = date('Y-m-d',strtotime('+1 day',strtotime($start)));
+
+	// return $start;
+
+	$messages = DB::table('message')
+				->where('created_at','>=',$start)
+				->where('created_at','<',$end)
+				->orderBy('created_at','desc')	
+				// ->lists('id');							
+				->get();	
+	// return $messages;
+	DB::table('session')->where('id',1)->update(['value'=>sizeof($messages)]);	
+
+	// return dd($messages);
+	
+	return View::make('timeline',compact('messages'));
+	
+})->before('auth');
+
+
 
 Route::group(['before'=>'auth'], function(){
 
