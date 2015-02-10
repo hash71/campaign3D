@@ -53,7 +53,7 @@
     </ul>
     <ul>
       <li>{{link_to('messages/index','Dashboard')}}</li>
-      <li>{{link_to('percentage/index','% Report')}}</li>
+      <li>{{link_to('percentage/index','Percentage Report')}}</li>
       <li>{{link_to('table/index','Full Report')}}</li>
       <li>{{link_to('bplist','BP List')}}</li>
       <li>{{link_to('timeline','Live Feed')}}</li>
@@ -72,7 +72,7 @@
           <ul>
             <li><a href="{{URL::to('messages/index')}}"><i class="fa fa-home"></i></a></li>
             <li><a href="{{URL::to('messages/index')}}">Dashboard</a></li>
-            <li class="active">% Report</li>
+            <li class="active">Percentage Report</li>
           </ul>
         </div>
         <!--/Breadcrumb--> 

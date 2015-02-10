@@ -52,8 +52,8 @@
           <div id="sku_bar"></div>
           <div id="sliders">
             <table>
-              <tr><td>Alpha Angle</td><td><input id="R0" type="range" min="0" max="45" value="15"/></td></tr>
-                <tr><td>Beta Angle</td><td><input id="R1" type="range" min="0" max="45" value="15"/></td></tr>
+              <tr><td>Alpha Angle</td><td><input id="R0" type="range" min="0" max="180" value="0"/></td></tr>
+                <tr><td>Beta Angle</td><td><input id="R1" type="range" min="0" max="180" value="0"/></td></tr>
             </table>
           </div>
         </div>
@@ -76,7 +76,7 @@
       <!-- New widget -->
       <div class="powerwidget cold-grey" id="flotchart-widget-1" data-widget-editbutton="false">
         <header>
-          <h2>SMS</h2>
+          <h2>SMS<small>Valid-Invalid Ratio</small></h2>
         </header>
         <div class="inner-spacer">
           <div id="pie_sms" style="height: 400px"></div>
@@ -93,7 +93,7 @@
       <!-- New widget -->
       <div class="powerwidget cold-grey" id="flotchart-widget-2" data-widget-editbutton="false">
         <header>
-          <h2>Customers<small>Gender Wise</small></h2>
+          <h2>Customers<small>Genderwise Ratio</small></h2>
         </header>
         <div class="inner-spacer">
           <div id="gender_pie"></div>
@@ -107,7 +107,7 @@
       <!-- New widget -->
       <div class="powerwidget cold-grey" id="flotchart-widget-3" data-widget-editbutton="false">
         <header>
-          <h2>Used Product<small></small></h2>
+          <h2>Used Product<small>SKU Wise Ratio</small></h2>
         </header>
         <div class="inner-spacer">
           <div id="product_pie"></div>
@@ -121,7 +121,7 @@
       <!-- New widget -->
       <div class="powerwidget cold-grey" id="flotchart-widget-4" data-widget-editbutton="false">
         <header>
-          <h2>Sales<small></small></h2>
+          <h2>Sales<small>Yes-No Ratio</small></h2>
         </header>
         <div class="inner-spacer">
           <div id="sales_pie"></div>

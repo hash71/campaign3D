@@ -13,6 +13,12 @@
 
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 <script type="text/javascript" src="assets/js/vendors/modernizr/modernizr.custom.js"></script>
+<style>
+  select.input-sm {
+  height: 40px !important;
+  line-height: 30px;
+  }
+</style>
 </head>
 
 <body>
@@ -51,7 +57,7 @@
     </ul>
     <ul>
       <li>{{link_to('messages/index','Dashboard')}}</li>
-      <li>{{link_to('percentage/index','% Report')}}</li>
+      <li>{{link_to('percentage/index','Percentage Report')}}</li>
       <li>{{link_to('table/index','Full Report')}}</li>
       <li>{{link_to('bplist','BP List')}}</li>
       <li>{{link_to('timeline','Live Feed')}}</li>
@@ -106,9 +112,9 @@
                   </tbody>
                   <tfoot>
                     <tr>
-                      <th><input type="text" name="filter_bp_name" placeholder="Filter BP Name" class="search_init" /></th>
-                      <th><input type="text" name="filter_bp_phone_number" placeholder="Filter BP Phone" class="search_init" /></th>
-                      <th><input type="text" name="filter_bp_lsa_code" placeholder="Filter BP LSA" class="search_init" /></th>
+                      <th>BP Name</th>
+                      <th>BP Phone Number</th>
+                      <th>BP LSA Code</th>
                     </tr>
                   </tfoot>
                 </table>

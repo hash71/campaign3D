@@ -457,8 +457,12 @@ class MessagesController extends \BaseController {
 				 			  ->whereNull('error')
 				 			  ->sum($code);	
 
-				 	array_push($single_data['data'], (int)$result);
-				 	$date = date ("Y-m-d", strtotime("+1 day", strtotime($date)));//current date 		 	
+				 	$tmp = array();
+
+				 	$tmp[0]=strtotime($date);
+				 	$tmp[1]=(int)$result;
+				 	array_push($single_data['data'], $tmp);
+				 	$date = date("Y-m-d", strtotime("+1 day", strtotime($date)));//current date 		 	
 				}
 
 				array_push($data['trend'], $single_data);
@@ -712,7 +716,12 @@ class MessagesController extends \BaseController {
 				 			  ->whereNull('error')
 				 			  ->sum($code);	
 
-				 	array_push($single_data['data'], (int)$result);
+				 	$tmp = array();
+
+				 	// $tmp[0]=(int)strtotime($date);
+				 	$tmp[0]=strtotime($date);
+				 	$tmp[1]=(int)$result;
+				 	array_push($single_data['data'], $tmp);
 				 	$date = date ("Y-m-d", strtotime("+1 day", strtotime($date)));//current date 		 	
 				}
 
@@ -720,10 +729,6 @@ class MessagesController extends \BaseController {
 			}
 
 			// return dd(json_encode($data['trend']));
-
-
-
-			// trend chart end
 
 
 

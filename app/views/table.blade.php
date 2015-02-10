@@ -13,6 +13,12 @@
 
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 <script type="text/javascript" src="../assets/js/vendors/modernizr/modernizr.custom.js"></script>
+<style>
+  select.input-sm {
+  height: 40px !important;
+  line-height: 30px;
+  }
+</style>
 </head>
 
 <body>
@@ -53,7 +59,7 @@
     </ul>
     <ul>
       <li>{{link_to('messages/index','Dashboard')}}</li>
-      <li>{{link_to('percentage/index','% Report')}}</li>
+      <li>{{link_to('percentage/index','Percentage Report')}}</li>
       <li>{{link_to('table/index','Full Report')}}</li>
       <li>{{link_to('bplist','BP List')}}</li>
       <li>{{link_to('timeline','Live Feed')}}</li>

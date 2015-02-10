@@ -44,6 +44,7 @@ $('.powerwidget > header').on('touchstart', function(event){});
 
 <script type="text/javascript">
     // When the document is ready
+    var months = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
     var all_data={{json_encode($data)}};
     var sms_pie=null,gender_pie=null,product_pie=null,sales_pie=null,sku_bar=null,sku_area=null;
     function updater()
@@ -260,25 +261,25 @@ $('.powerwidget > header').on('touchstart', function(event){});
         chart: {
             renderTo: 'sku_bar',
             type: 'column',
-            margin: 75,
+            margin: 100,
             options3d: {
                 enabled: true,
-                alpha: 15,
-                beta: 15,
+                alpha: 0,
+                beta: 0,
                 depth: 50,
                 viewDistance: 25
             }
         },
         title: {
-            text: 'Chart rotation demo'
-        },
-        subtitle: {
-            text: 'Test options by dragging the sliders below'
+            text: 'SKU Wise Total Sell'
         },
         plotOptions: {
             column: {
                 depth: 25
             }
+        },
+        xAxis: {
+            categories: ['SKU Wise 3D Bar Chart']
         },
         series: all_data.bar
 
@@ -311,37 +312,40 @@ $('.powerwidget > header').on('touchstart', function(event){});
             renderTo:'sku_area'
         },
         title: {
-            text: 'US and USSR nuclear stockpiles'
-        },
-        subtitle: {
-            text: 'Source: <a href="http://thebulletin.metapress.com/content/c4120650912x74k7/fulltext.pdf">' +
-                'thebulletin.metapress.com</a>'
+            text: 'Sales Trend'
         },
         xAxis: {
-            allowDecimals: false,
+            title:
+            {
+                text: "Date Wise Sales Trend"
+            },
+            allowDecimals: true,
             labels: {
-                rotation: -90,
+                rotation: -45,
                 formatter: function () {
-                    return this.value; // clean, unformatted number for year
+                    var tmp=new Date(this.value*1000);
+                    return tmp.getDate()+'-'+months[tmp.getMonth()];
                 }
             }
         },
         yAxis: {
             title: {
-                text: 'Nuclear weapon states'
+                text: 'Quantity'
             },
-            labels: {
-                formatter: function () {
-                    return this.value / 1000 + 'k';
-                }
-            }
+            min: 0
         },
         tooltip: {
-            pointFormat: '{series.name} produced <b>{point.y:,.0f}</b><br/>warheads in {point.x}'
+            formatter: function () {
+                    //console.log(this.point);
+                   // return this.point.x;
+                     var tmp=new Date(this.point.x*1000);
+                     return tmp.getDate()+'-'+months[tmp.getMonth()]+'<br/><b>'+this.series.name+':</b>'+this.point.y;
+                }
+            // headerFormat: '<small>{point.key}</small><br/>',
+            // pointFormat: '{series.name} Sell <b>{point.y:,.0f}</b>'
         },
         plotOptions: {
             area: {
-                pointStart: 1940,
                 marker: {
                     enabled: false,
                     symbol: 'circle',
