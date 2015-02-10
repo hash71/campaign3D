@@ -192,7 +192,7 @@
                                 <h2>Error</h2>
                                 <p>{{$message->error}}</p>
                                 <h2>Message</h2>
-                                <p>{{$message->full_message?$msg->full_message:"This is the full message"}}</p>
+                                <p>{{$message->full_message?$message->full_message:"This is the full message"}}</p>
                               </div>
                             </li>
 
