@@ -2,31 +2,93 @@
 
 
 
+Route::get('newapi/{token}/{bp_mobile}/{message}','MessagesController@newcreate');
 
-// Route::get('dummy_user',function(){
 
-// 	User::create([
-// 			'email'=>'analyzen@gmail.com',
-// 			'password'=>Hash::make('analyzen')
-// 	]);
+// Route::get('timeline',function(){
 
-// });
-
-Route::get('mobile',function(){
-	 return preg_match("/^01[0-9]{9}$/", '01710340450');
-});
-
-Route::get('timeline',function(){
-
-	if(Request::ajax()){
+// 	if(Request::ajax()){
 	
-		$messages = DB::select('SELECT * FROM message WHERE created_at BETWEEN timestamp(DATE_SUB(NOW(), INTERVAL 30 SECOND)) AND timestamp(NOW())');
+// 		$messages = DB::select('SELECT * FROM message WHERE created_at BETWEEN timestamp(DATE_SUB(NOW(), INTERVAL 30 SECOND)) AND timestamp(NOW())');
 
-		return View::make('timelineajax',compact('messages'));
+// 		return View::make('timelineajax',compact('messages'));
 	
-	}
+// 	}
+
+// 	$start = date("Y-m-d");
+
+// 	$end = date('Y-m-d',strtotime('+1 day',strtotime($start)));
+
+// 	$messages = DB::table('message')
+// 				->where('created_at','>=',$start)
+// 				->where('created_at','<',$end)
+// 				->orderBy('created_at','desc')
+// 				->get();
+	
+// 	return View::make('timeline',compact('messages'));
+	
+// })->before('auth');
 
 
+//testing
+// Route::get('timeline',function(){
+
+// 	if(Request::ajax()){
+
+// 		$now = date('Y-m-d H:i:s');
+
+// 		$minus_30 = date('Y-m-d',strtotime('-30 second',strtotime($now)));
+
+// 		// 
+
+// 		$start = date("Y-m-d");
+
+// 		$end = date('Y-m-d',strtotime('+1 day',strtotime($start)));
+
+// 		$total = DB::table('message')
+// 				->where('created_at','>=',$start)
+// 				->where('created_at','<',$end)								
+// 				->count();
+
+// 		// 
+// 		$new_msg = $total - Session::get('size');
+
+
+// 		$messages = DB::table('message')
+// 				->orderBy('created_at','desc')	
+// 				->take($new_msg)				
+// 				->get();
+	
+// 		// $messages = DB::select('SELECT * FROM message WHERE created_at BETWEEN timestamp(DATE_SUB(NOW(), INTERVAL 30 SECOND)) AND timestamp(NOW())');
+
+// 		return View::make('timelineajax',compact('messages'));
+	
+// 	}
+// 	// $now = date('Y-m-d H:i:s');
+
+// 	// return $minus_30 = date('Y-m-d H:i:s',strtotime('-30 second',strtotime($now)));
+// 	$start = date("Y-m-d");
+
+// 	$end = date('Y-m-d',strtotime('+1 day',strtotime($start)));
+
+// 	$messages = DB::table('message')
+// 				->where('created_at','>=',$start)
+// 				->where('created_at','<',$end)
+// 				->orderBy('created_at','desc')								
+// 				->get();
+
+
+// 	// return dd($messages);
+
+	
+// 	Session::put('size',sizeof($messages) );
+	
+// 	return View::make('timeline',compact('messages'));
+	
+// })->before('auth');
+
+Route::get('timeline1',function(){	
+	
 	$start = date("Y-m-d");
 
 	$end = date('Y-m-d',strtotime('+1 day',strtotime($start)));
@@ -34,32 +96,46 @@ Route::get('timeline',function(){
 	$messages = DB::table('message')
 				->where('created_at','>=',$start)
 				->where('created_at','<',$end)
-				->orderBy('created_at','desc')
-				->get();
-	// return dd($messages);
+				->orderBy('created_at','desc')								
+				->get();	
 
+	DB::table('session')->where('id',1)->update(['value'=>sizeof($messages)]);	
+
+	return dd($messages);
+	
 	return View::make('timeline',compact('messages'));
 	
+})->before('auth');
+
+Route::get('timeline2', function(){			
+
+		$start = date("Y-m-d");
+
+		$end = date('Y-m-d',strtotime('+1 day',strtotime($start)));
+
+		$total = DB::table('message')
+				->where('created_at','>=',$start)
+				->where('created_at','<',$end)								
+				->count();		
+
+		$new_msg =$total - DB::table('session')->where('id',1)->pluck('value');
+		
+		if($new_msg == 0){
+			return "no new msg";
+		}
+
+		$messages = DB::table('message')
+				->orderBy('created_at','desc')	
+				->take($new_msg)				
+				->get();		
+
+		$id = DB::table('session')->where('id',1)->update(['value'=>$total]);
+		
+		return dd($messages);		
+
+		return View::make('timelineajax',compact('messages'));	
+	
 });
-
-Route::get('uri', function(){
-
-	// $result = DB::select(query, bindings)
-	$messages = DB::select('SELECT * FROM message WHERE created_at BETWEEN timestamp(DATE_SUB(NOW(), INTERVAL 30 SECOND)) AND timestamp(NOW())');
-	return dd($result);
-	$start = date("h-i-s");
-
-	$end = date('h-i-s',strtotime('-30 second',strtotime($start)));
-
-	$messages = DB::table('message')
-				->where('created_at','>=',$end)
-				->where('created_at','<',$start)
-				->orderBy('created_at','desc')
-				->get();
-	return dd($messages);
-});
-
-Route::get('newapi/{token}/{bp_mobile}/{message}','MessagesController@newcreate');
 
 Route::group(['before'=>'auth'], function(){
 
@@ -76,16 +152,12 @@ Route::controller('users', 'UsersController');
 Route::get('bplist', function(){
 
 	return View::make('bplist');
-});
+
+})->before('auth');
 
 Route::get('/profile/{id}', function($id){
 	
-	// $t = DB::table('message')->where();
-
-	// return dd(json_decode($t->error));
-	// 0192614659
-	// $bp = DB::table('bp_info')->where('mobile','0192614659')->pluck('id');
-	// return $bp;
+	
 	$bp = DB::table('bp_info')->find($id);
 
 	$messages = DB::table('message')
@@ -93,28 +165,38 @@ Route::get('/profile/{id}', function($id){
 				->orderBy('created_at','desc')
 				->get();
 
-	// return dd($messages);
+	
 
 	return View::make('profile',compact('bp','messages'));
 
-});
+})->before('auth');
 
 Route::get('/', function(){	
-	// return "helo";
+	
 		return Redirect::to('users/login');
 });
 
-Route::get('token',function(){
-	$key = 'analyzen';
-	$string = 'access_token';
 
-	$encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($key), $string, MCRYPT_MODE_CBC, md5(md5($key))));
-	$decrypted = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($key), base64_decode($encrypted), MCRYPT_MODE_CBC, md5(md5($key))), "\0");
+// Route::get('dummy_user',function(){
 
-	return $decrypted." = ".$encrypted." size = ".strlen($encrypted);
-	var_dump($encrypted);
-	var_dump($decrypted);
-});
+// 	User::create([
+// 			'email'=>'analyzen@gmail.com',
+// 			'password'=>Hash::make('analyzen')
+// 	]);
+
+// });
+
+// Route::get('token',function(){
+// 	$key = 'analyzen';
+// 	$string = 'access_token';
+
+// 	$encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($key), $string, MCRYPT_MODE_CBC, md5(md5($key))));
+// 	$decrypted = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, md5($key), base64_decode($encrypted), MCRYPT_MODE_CBC, md5(md5($key))), "\0");
+
+// 	return $decrypted." = ".$encrypted." size = ".strlen($encrypted);
+// 	var_dump($encrypted);
+// 	var_dump($decrypted);
+// });
 
 
 

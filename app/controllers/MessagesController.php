@@ -10,7 +10,7 @@ class MessagesController extends \BaseController {
 		/*
 		http://localhost/campaign/public/newapi/token/01910340450/u1 nazmul,25,m,01710340450,1001,5,1,81896021,2,y,1:2
 
-		http://localhost/campaign/public/newapi/c1Wt08MRDhdTce7vFNF8BYNNiImjgFeDjsqbkkK6KbWYkji7rFV+UjIDaVbgwYKt3E0pVeMKVYAz5N2QWrOBFQ==/01910340450/u1 nazmul,25,m,01710340450,1001,5,1,81896021,2,y,1:2
+		http://localhost/campaign3D/public/newapi/c1Wt08MRDhdTce7vFNF8BYNNiImjgFeDjsqbkkK6KbWYkji7rFV+UjIDaVbgwYKt3E0pVeMKVYAz5N2QWrOBFQ==/0196486006/u1 hasan,30,f,0171034045,1001,5,1,81896021,2,y,1:2
 
 
 		Length = 12(lowest possible valid message length)
@@ -413,6 +413,7 @@ class MessagesController extends \BaseController {
 				$result = DB::table('message')
 						->where('created_at','>=',$start)
 						->where('created_at','<',$end_plus_one)
+						->whereNull('error')
 						->sum($code);	
 
 				$single_data['name'] = $code;
@@ -453,6 +454,7 @@ class MessagesController extends \BaseController {
 					$result = DB::table('message')
 				 			  ->where('created_at','>=',$date)
 				 			  ->where('created_at','<',$custom_end)
+				 			  ->whereNull('error')
 				 			  ->sum($code);	
 
 				 	array_push($single_data['data'], (int)$result);
@@ -516,12 +518,14 @@ class MessagesController extends \BaseController {
 				 	->where('created_at','>=',$start)
 				 	->where('created_at','<',$custom_end)
 				 	->where('gender','M')
+				 	->whereNull('error')
 				 	->count();
 
 			$female = DB::table('message')
 				 	->where('created_at','>=',$start)
 				 	->where('created_at','<',$custom_end)
-				 	->where('gender','F')				 	
+				 	->where('gender','F')
+				 	->whereNull('error')				 	
 				 	->count();
 
 			$data['gender'] = [
@@ -553,12 +557,14 @@ class MessagesController extends \BaseController {
 				 	->where('created_at','>=',$start)
 				 	->where('created_at','<',$custom_end)
 				 	->where('sales','Y')
+				 	->whereNull('error')
 				 	->count();
 
 			$no = DB::table('message')
 				 	->where('created_at','>=',$start)
 				 	->where('created_at','<',$custom_end)
-				 	->where('sales','N')				 	
+				 	->where('sales','N')	
+				 	->whereNull('error')			 	
 				 	->count();
 
 			
@@ -581,7 +587,7 @@ class MessagesController extends \BaseController {
 
 
 
-					// used product chart
+			// used product chart
 			$data['used_product'] = array();
 			
 			$custom_end = date('Y-m-d',strtotime('+1 day',strtotime($end)));
@@ -596,6 +602,7 @@ class MessagesController extends \BaseController {
 					 	->where('created_at','>=',$start)
 					 	->where('created_at','<',$custom_end)
 					 	->where('currently_used_product_table_id',$i)
+					 	->whereNull('error')
 					 	->count();
 
 				
@@ -661,6 +668,7 @@ class MessagesController extends \BaseController {
 				$result = DB::table('message')
 						->where('created_at','>=',$start)
 						->where('created_at','<',$end_plus_one)
+						->whereNull('error')
 						->sum($code);	
 
 				$single_data['name'] = $code;
@@ -701,6 +709,7 @@ class MessagesController extends \BaseController {
 					$result = DB::table('message')
 				 			  ->where('created_at','>=',$date)
 				 			  ->where('created_at','<',$custom_end)
+				 			  ->whereNull('error')
 				 			  ->sum($code);	
 
 				 	array_push($single_data['data'], (int)$result);
@@ -765,12 +774,14 @@ class MessagesController extends \BaseController {
 				 	->where('created_at','>=',$start)
 				 	->where('created_at','<',$custom_end)
 				 	->where('gender','M')
+				 	->whereNull('error')
 				 	->count();
 
 			$female = DB::table('message')
 				 	->where('created_at','>=',$start)
 				 	->where('created_at','<',$custom_end)
-				 	->where('gender','F')				 	
+				 	->where('gender','F')
+				 	->whereNull('error')				 	
 				 	->count();
 
 			$data['gender'] = [
@@ -801,12 +812,14 @@ class MessagesController extends \BaseController {
 				 	->where('created_at','>=',$start)
 				 	->where('created_at','<',$custom_end)
 				 	->where('sales','Y')
+				 	->whereNull('error')
 				 	->count();
 
 			$no = DB::table('message')
 				 	->where('created_at','>=',$start)
 				 	->where('created_at','<',$custom_end)
-				 	->where('sales','N')				 	
+				 	->where('sales','N')
+				 	->whereNull('error')				 	
 				 	->count();
 
 			
@@ -847,6 +860,7 @@ class MessagesController extends \BaseController {
 					 	->where('created_at','>=',$start)
 					 	->where('created_at','<',$custom_end)
 					 	->where('currently_used_product_table_id',$i)
+					 	->whereNull('error')
 					 	->count();
 
 				

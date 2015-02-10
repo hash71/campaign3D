@@ -320,6 +320,7 @@ $('.powerwidget > header').on('touchstart', function(event){});
         xAxis: {
             allowDecimals: false,
             labels: {
+                rotation: -90,
                 formatter: function () {
                     return this.value; // clean, unformatted number for year
                 }

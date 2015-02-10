@@ -28,19 +28,19 @@
 <div class="main-wrap">  
  
   <!--Main Menu-->
-    <div class="responsive-admin-menu">    
-      <div class="responsive-menu">ORB
-        <div class="menuicon"><i class="fa fa-angle-down"></i></div>
-      </div>
-      <ul id="menu">
-        <li><a class="active" href="index.html" title="Dashboard"><i class="entypo-briefcase"></i><span> Dashboard</span></a></li>
-      </ul>
-      <ul>
-      <li>{{link_to('messages/index','Index Page')}}</li>
-      <li>{{link_to('percentage/index','Percentage Page')}}</li>
-      <li>{{link_to('table/index','Table Page')}}</li>
-      <li>{{link_to('bplist','BP List')}}</li>
-      <li>{{link_to('timeline','Timeline')}}</li>
-    </ul>
+  <div class="responsive-admin-menu">    
+    <div class="responsive-menu">ORB
+      <div class="menuicon"><i class="fa fa-angle-down"></i></div>
     </div>
+    <ul id="menu"> 
+      <li><a class="active" href="{{URL::to('messages/index')}}" title="Dashboard"><i class="entypo-briefcase"></i><span> Dashboard</span></a></li>
+    </ul>
+    <ul>
+      <li>{{link_to('messages/index','Dashboard')}}</li>
+      <li>{{link_to('percentage/index','% Report')}}</li>
+      <li>{{link_to('table/index','Full Report')}}</li>
+      <li>{{link_to('bplist','BP List')}}</li>
+      <li>{{link_to('timeline','Live Feed')}}</li>
+    </ul>
+  </div>
     <!--/MainMenu-->

@@ -9,9 +9,9 @@
     <!--Breadcrumb-->
     <div class="breadcrumb clearfix">
       <ul>
-        <li><a href="index.html"><i class="fa fa-home"></i></a></li>
-        <li><a href="index.html">Dashboard</a></li>
-        <li class="active">Data</li>
+        <li><a href="{{URL::to('messages/index')}}"><i class="fa fa-home"></i></a></li>
+        <!-- <li><a href="{{URL::to('messages/index')}}">Dashboard</a></li> -->
+        <li class="active">Dashboard</li>
       </ul>
     </div>
     <!--/Breadcrumb--> 
