@@ -2474,6 +2474,7 @@ var oTable2=null;
 
             if ($('#table-2').length) {
                 var oTable = $('#table-2').dataTable({
+                    "aaSorting": [[ 21, "desc" ]] ,                   
                     "oLanguage": {
                         "sSearch": "Search all columns:"
                     },
@@ -3905,7 +3906,7 @@ var oTable2=null;
             e.preventDefault();
             $('#lockscreen').modal();
             $('#yesilock').click(function () {
-                window.open('admin-lock.html', '_self');
+                //window.open('admin-lock.html', '_self');
                 $('#lockscreen').modal('hide');
             });
 

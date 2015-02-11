@@ -94,7 +94,7 @@
 
                   <li class="col-md-4 col-sm-4 col-xs-4"><strong>{{$females}}<br>({{round(($females/$total_records)*100,2)}}%)</strong><small>Female</small></li>
 
-                  <li class="col-md-4 col-sm-4 col-xs-4"><strong><br>{{$total_records}}</strong><small>total</small></li>
+                  <li class="col-md-4 col-sm-4 col-xs-4"><strong><br>{{$total_records}}</strong><small>Total</small></li>
                 </ul>
               </div>
             </div>
@@ -178,7 +178,7 @@
             <div class="powerwidget powerwidget-as-portlet powerwidget-as-portlet-purple" id="curUsedProduct" data-widget-editbutton="false">
               <header><b>Sold Products</b></header>
               <div class="inner-spacer nopadding">
-                <div class="portlet-big-icon animated bounceIn"><i class="glyphicon glyphicon-magnet"></i></div>
+                <div class="portlet-big-icon animated bounceIn"><i class="fa fa-shopping-cart"></i></div>
                 <ul class="portlet-bottom-block">
                 <?php $sum = 0;?>
                 @foreach($products as $key=>$amount)
@@ -267,7 +267,7 @@
         <i class="fa fa-lock"></i> </div>
       <div class="modal-body text-center">Are You Sure Want To Lock Screen?</div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" id="yesilock">Ok</button>
+        <button type="button" class="btn btn-default" id="yesilock">{{link_to('logout','Ok')}}</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>

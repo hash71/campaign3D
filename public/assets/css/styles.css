@@ -2209,12 +2209,13 @@ a.list-group-item-warning:focus { border-color: #f0ad4e }
 /*Your copyright*/
 
 .content-wrapper:after {
-	content:"Design & Developed By Analyzen";
+	content:"Developed by Analyzen";
 	color:#858689;
-	font-size:11px;
+	font-size:14px;
 	position:absolute;
 	bottom:10px;
-	right:15px;	
+	right:15px;
+
 }
 
 
@@ -2843,7 +2844,11 @@ object { max-width: 100%; }
 }
 
 .main-header {
-	background: #fff;
+	background: -webkit-linear-gradient(360deg, #00d2ff 10%, #3a7bd5 90%); /* Chrome 10+, Saf5.1+ */
+	background:    -moz-linear-gradient(360deg, #00d2ff 10%, #3a7bd5 90%); /* FF3.6+ */
+	background:     -ms-linear-gradient(360deg, #00d2ff 10%, #3a7bd5 90%); /* IE10 */
+	background:      -o-linear-gradient(360deg, #00d2ff 10%, #3a7bd5 90%); /* Opera 11.10+ */
+	background:         linear-gradient(360deg, #00d2ff 10%, #3a7bd5 90%); /* W3C */
 	position: absolute;
 	width: 100%;
 	right: 0px;

@@ -62,7 +62,10 @@
     
     <div class="copyrights">  <br>
     <h5>
-      Developed & managed by <a href="http://www.analyzenbd.com/" target="_blank">Analyzen</a> 
+      Copyright 2015 Unilever Bangladesh Ltd.
+    </h5>
+    <h5>
+      Developed &amp; managed by <a style="color:#fff; text-decoration:none; font-size: 16px;" href="http://www.analyzenbd.com/" target="_blank"><b>Analyzen</b></a> 
     </h5>
     </div>
   </div>

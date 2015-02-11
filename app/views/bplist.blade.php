@@ -183,7 +183,7 @@
         <i class="fa fa-lock"></i> </div>
       <div class="modal-body text-center">Are You Sure Want To Lock Screen?</div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" id="yesilock">Ok</button>
+        <button type="button" class="btn btn-default" id="yesilock">{{link_to('logout','Ok')}}</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
