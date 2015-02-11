@@ -29,7 +29,7 @@
       <li><a class="active" href="{{URL::to('messages/index')}}" title="Dashboard"><i class="entypo-briefcase"></i><span> Dashboard</span></a></li>
     </ul>
     <ul>
-      <li>{{link_to('messages/index','Dashboard')}}</li>
+      
       <li>{{link_to('percentage/index','Percentage Report')}}</li>
       <li>{{link_to('table/index','Full Report')}}</li>
       <li>{{link_to('bplist','BP List')}}</li>

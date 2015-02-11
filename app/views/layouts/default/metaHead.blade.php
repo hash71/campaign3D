@@ -4,7 +4,7 @@
 <meta name="author" content="DazeinCreative">
 <meta name="description" content="ORB - Powerfull and Massive Admin Dashboard Template with tonns of useful features">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ORB</title>
+<title>Dashboard</title>
 
 
 {{HTML::style('assets/css/daterangepicker-bs3.css')}}

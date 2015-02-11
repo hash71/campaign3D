@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ORB | Login</title>
+<title>Unilever MARS V2.0 - Login</title>
 <link href="../assets/css/styles.css" rel="stylesheet" type="text/css">
 
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
@@ -19,7 +19,8 @@
       
         <header>
           <div class="image-block"><img src="../assets/images/logo.png" alt="User" /></div>
-          Login to ORB <small>Have no account? &#8212; <a href="#">Register</a></small></header>
+          Login to Unilever MARS V2.0
+        </header>
         <fieldset>
           <section>
             <div class="row">
@@ -38,7 +39,7 @@
                 <label class="input"> <i class="icon-append fa fa-lock"></i>
                   <input type="password" name="password">
                 </label>
-                <div class="note"><a href="#">Forgot password?</a></div>
+                <div class="note"></div>
               </div>
             </div>
           </section>
@@ -58,16 +59,12 @@
         </footer>
       {{Form::close()}}
     </div>
-    <div class="using-social-header">Sign In Using Social Profiles</div>
-    <div class="social-buttons">
-      <ul class="social">
-        <li><a href="http://facebook.com/"><i class="entypo-facebook-circled"></i></a></li>
-        <li><a href="http://google.com/"><i class="entypo-gplus-circled"></i></a></li>
-        <li><a href="http://twitter.com/"><i class="entypo-twitter-circled"></i></a></li>
-      </ul>
+    
+    <div class="copyrights">  <br>
+    <h5>
+      Developed & managed by <a href="http://www.analyzenbd.com/" target="_blank">Analyzen</a> 
+    </h5>
     </div>
-    <div class="copyrights"> ORB Power Admin Dashboard Template <br>
-      Created by DazeinCreative &copy; 2014 </div>
   </div>
 </div>
 

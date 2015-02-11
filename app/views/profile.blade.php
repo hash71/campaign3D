@@ -52,7 +52,7 @@
           <li><a class="active" href="{{URL::to('messages/index')}}" title="Dashboard"><i class="entypo-briefcase"></i><span> Dashboard</span></a></li>
         </ul>
         <ul>
-          <li>{{link_to('messages/index','Dashboard')}}</li>
+          
           <li>{{link_to('percentage/index','Percentage Report')}}</li>
           <li>{{link_to('table/index','Full Report')}}</li>
           <li>{{link_to('bplist','BP List')}}</li>
@@ -165,7 +165,7 @@
                                   
                                   
                                   @else
-                                  <p>Age: {{$message->age}} | Gender: {{$message->gender}} | Mobile: {{$message->customer_mobile}} | Upazilla/Thana: {{$message->thana_code}} | District: {{DB::table('thana')->where('thana_code',$message->thana_code)->pluck('district')}} | Division: {{DB::table('thana')->where('thana_code',$message->thana_code)->pluck('division')}} | Education: {{DB::table('education_info')->where('id',$message->education_id)->pluck('name')}} | Occupation: {{DB::table('occupation')->where('id',$message->id)->pluck('occupation_name')}} | Coupon: {{$message->coupon_code}} | Used Product: {{DB::table('currently_used_product')->where('id',$message->currently_used_product_table_id)->pluck('product')}}</p>
+                                  <p>Name: {{$message->customer_name}} | Age: {{$message->age}} | Gender: {{$message->gender}} | Mobile: {{$message->customer_mobile}} | Upazilla/Thana: {{$message->thana_code}} | District: {{DB::table('thana')->where('thana_code',$message->thana_code)->pluck('district')}} | Division: {{DB::table('thana')->where('thana_code',$message->thana_code)->pluck('division')}} | Education: {{DB::table('education_info')->where('id',$message->education_id)->pluck('name')}} | Occupation: {{DB::table('occupation')->where('id',$message->id)->pluck('occupation_name')}} | Coupon: {{$message->coupon_code}} | Used Product: {{DB::table('currently_used_product')->where('id',$message->currently_used_product_table_id)->pluck('product')}}</p>
                                   <p>FAL: {{$message->FAL}} | PDF: {{$message->PDF}}| PWB: {{$message->PWB}}| PNS: {{$message->PNS}}| PPC: {{$message->PPC}}| DBM: {{$message->DBM}}</p>
                                   @endif
                                   
@@ -190,7 +190,12 @@
                               <div class="tmicon bg-red fa-times"></div>
                               <div class="tmlabel">
                                 <h2>Error</h2>
-                                <p>{{$message->error}}</p>
+                                <?php $e = json_decode($message->error);
+                                    foreach ($e as $key => $value) {
+                                      echo "<p>".$key."::".$value."</p>";      
+                                    }
+                                 ?>
+                                
                                 <h2>Message</h2>
                                 <p>{{$message->full_message?$message->full_message:"This is the full message"}}</p>
                               </div>

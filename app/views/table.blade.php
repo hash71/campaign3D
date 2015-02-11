@@ -6,7 +6,7 @@
 <meta name="author" content="DazeinCreative">
 <meta name="description" content="ORB - Powerfull and Massive Admin Dashboard Template with tonns of useful features">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ORB</title>
+<title>Full Report</title>
 
 <link href="../assets/css/datepicker.css" rel="stylesheet" type="text/css">
 <link href="../assets/css/styles.css" rel="stylesheet" type="text/css">
@@ -58,7 +58,7 @@
       <li><a class="active" href="{{URL::to('messages/index')}}" title="Dashboard"><i class="entypo-briefcase"></i><span> Dashboard</span></a></li>
     </ul>
     <ul>
-      <li>{{link_to('messages/index','Dashboard')}}</li>
+      
       <li>{{link_to('percentage/index','Percentage Report')}}</li>
       <li>{{link_to('table/index','Full Report')}}</li>
       <li>{{link_to('bplist','BP List')}}</li>

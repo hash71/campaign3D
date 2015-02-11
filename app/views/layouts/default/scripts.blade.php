@@ -271,7 +271,7 @@ $('.powerwidget > header').on('touchstart', function(event){});
             }
         },
         title: {
-            text: 'SKU Wise Total Sell'
+            text: 'SKU Wise Total Sales'
         },
         plotOptions: {
             column: {
